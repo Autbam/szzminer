@@ -146,6 +146,7 @@
     <Compile Include="Tools\ExitWindows.cs" />
     <Compile Include="Tools\getIncomeData.cs" />
     <Compile Include="Tools\GPU.cs" />
+    <Compile Include="Tools\HotKey.cs" />
     <Compile Include="Tools\IniHelper.cs" />
     <Compile Include="Tools\LnkHelper.cs" />
     <Compile Include="Tools\NetCardDriver.cs" />

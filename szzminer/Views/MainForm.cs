@@ -305,6 +305,9 @@ namespace szzminer.Views
             IniHelper.SetValue("szzminer", "autoOverclock", autoOverclock.Active.ToString(), iniPath);
             IniHelper.SetValue("szzminer", "remoteIP", InputRemoteIP.Text, iniPath);
             IniHelper.SetValue("szzminer", "remoteEnable", remoteControl.Checked.ToString(), iniPath);
+            IniHelper.SetValue("szzminer", "hideKey", hideKey.Text, iniPath);
+            IniHelper.SetValue("szzminer", "showKey", showKey.Text, iniPath);
+            IniHelper.SetValue("szzminer", "ifhide", autoHideSwitch.Active.ToString(), iniPath);
             //写显卡配置
             string path = Application.StartupPath + "\\config\\gpusConfig.ini";
             if (File.Exists(path))
@@ -345,6 +348,9 @@ namespace szzminer.Views
             autoOverclock.Active = IniHelper.GetValue("szzminer", "autoOverclock", "", iniPath) == "True" ? true : false;
             InputRemoteIP.Text = IniHelper.GetValue("szzminer", "remoteIP", "", iniPath);
             remoteControl.Checked= IniHelper.GetValue("szzminer", "remoteEnable", "", iniPath) == "True" ? true : false;
+            hideKey.Text=IniHelper.GetValue("szzminer", "hideKey", "", iniPath);
+            showKey.Text=IniHelper.GetValue("szzminer", "showKey", "", iniPath);
+            autoHideSwitch.Active=IniHelper.GetValue("szzminer", "ifhide", "", iniPath) == "True" ? true : false;
             //读显卡配置
             IniHelper.setPath(Application.StartupPath + "\\config\\gpusConfig.ini");
             List<string> gpuini;
@@ -829,6 +835,7 @@ namespace szzminer.Views
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            kh.UnHook();
             WriteConfig();
             if (isMining)
             {
@@ -905,6 +912,10 @@ namespace szzminer.Views
             {
                 InputRemoteIP.Enabled = false;
                 StartReceive();
+            }
+            if (autoHideSwitch.Active)
+            {
+                autoHideSwitch_Click(null,null);
             }
         }
 
@@ -1297,6 +1308,183 @@ namespace szzminer.Views
         private void autoOverclock_Click_1(object sender, EventArgs e)
         {
             WriteConfig();
+        }
+
+        private void hideKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            StringBuilder keyValue = new StringBuilder();
+            keyValue.Length = 0;
+            keyValue.Append("");
+            if (e.Modifiers != 0)
+            {
+                if (e.Control)
+                    keyValue.Append("Ctrl + ");
+                if (e.Alt)
+                    keyValue.Append("Alt + ");
+                if (e.Shift)
+                    keyValue.Append("Shift + ");
+            }
+            if ((e.KeyValue >= 33 && e.KeyValue <= 40) ||
+                (e.KeyValue >= 65 && e.KeyValue <= 90) ||   //a-z/A-Z
+                (e.KeyValue >= 112 && e.KeyValue <= 123))   //F1-F12
+            {
+                keyValue.Append(e.KeyCode);
+            }
+            else if ((e.KeyValue >= 48 && e.KeyValue <= 57))    //0-9
+            {
+                keyValue.Append(e.KeyCode.ToString().Substring(1));
+            }
+            this.hideKey.Text = "";
+            //设置当前活动控件的文本内容
+            this.hideKey.Text = keyValue.ToString();
+        }
+
+        private void showKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            StringBuilder keyValue = new StringBuilder();
+            keyValue.Length = 0;
+            keyValue.Append("");
+            if (e.Modifiers != 0)
+            {
+                if (e.Control)
+                    keyValue.Append("Ctrl + ");
+                if (e.Alt)
+                    keyValue.Append("Alt + ");
+                if (e.Shift)
+                    keyValue.Append("Shift + ");
+            }
+            if ((e.KeyValue >= 33 && e.KeyValue <= 40) ||
+                (e.KeyValue >= 65 && e.KeyValue <= 90) ||   //a-z/A-Z
+                (e.KeyValue >= 112 && e.KeyValue <= 123))   //F1-F12
+            {
+                keyValue.Append(e.KeyCode);
+            }
+            else if ((e.KeyValue >= 48 && e.KeyValue <= 57))    //0-9
+            {
+                keyValue.Append(e.KeyCode.ToString().Substring(1));
+            }
+            this.showKey.Text = "";
+            //设置当前活动控件的文本内容
+            this.showKey.Text = keyValue.ToString();
+        }
+
+        private void hideKey_KeyUp(object sender, KeyEventArgs e)
+        {
+            string str = this.hideKey.Text.TrimEnd();
+            int len = str.Length;
+            if (len >= 1 && str.Substring(str.Length - 1) == "+")
+            {
+                this.hideKey.Text = "";
+            }
+        }
+
+        private void showKey_KeyUp(object sender, KeyEventArgs e)
+        {
+            string str = this.showKey.Text.TrimEnd();
+            int len = str.Length;
+            if (len >= 1 && str.Substring(str.Length - 1) == "+")
+            {
+                this.showKey.Text = "";
+            }
+        }
+        HotKey kh = new HotKey();
+        void kh_OnKeyDownEvent(object sender, KeyEventArgs e)
+        {
+            string[] hotkey = hideKey.Text.Split('+');
+            string[] showkey = showKey.Text.Split('+');
+            for(int i = 0; i < hotkey.Length; i++)
+            {
+                hotkey[i] = hotkey[i].Trim();
+                hotkey[i] = hotkey[i].Replace("Ctrl","Control");
+            }
+            for (int i = 0; i < hotkey.Length; i++)
+            {
+                showkey[i] = showkey[i].Trim();
+                showkey[i] = showkey[i].Replace("Ctrl", "Control");
+            }
+            if (hotkey.Length == 1)
+            {
+                if (e.KeyData == (Keys)Enum.Parse(typeof(Keys), hotkey[0]))
+                {
+                    this.Hide();
+                    ShowInTaskbar = false;
+                    icon.Visible = false;
+                }
+            }
+            if (hotkey.Length == 2)
+            {
+                if (e.KeyData == ((Keys)Enum.Parse(typeof(Keys), hotkey[0])| (Keys)Enum.Parse(typeof(Keys), hotkey[1])))
+                {
+                    this.Hide();
+                    ShowInTaskbar = false;
+                    icon.Visible = false;
+                }
+            }
+            if (hotkey.Length == 3)
+            {
+                if (e.KeyData == ((Keys)Enum.Parse(typeof(Keys), hotkey[0]) | (Keys)Enum.Parse(typeof(Keys), hotkey[1])| (Keys)Enum.Parse(typeof(Keys), hotkey[2])))
+                {
+                    this.Hide();
+                    ShowInTaskbar = false;
+                    icon.Visible = false;
+                }
+            }
+            if (showkey.Length == 1)
+            {
+                if (e.KeyData == (Keys)Enum.Parse(typeof(Keys), showkey[0]))
+                {
+                    this.Show();
+                    ShowInTaskbar = true;
+                    icon.Visible = true;
+                }
+            }
+            if (showkey.Length == 2)
+            {
+                if (e.KeyData == ((Keys)Enum.Parse(typeof(Keys), showkey[0]) | (Keys)Enum.Parse(typeof(Keys), showkey[1])))
+                {
+                    this.Show();
+                    ShowInTaskbar = true;
+                    icon.Visible = true;
+                }
+            }
+            if (showkey.Length == 3)
+            {
+                if (e.KeyData == ((Keys)Enum.Parse(typeof(Keys), showkey[0]) | (Keys)Enum.Parse(typeof(Keys), showkey[1]) | (Keys)Enum.Parse(typeof(Keys), showkey[2])))
+                {
+                    this.Show();
+                    ShowInTaskbar = true;
+                    icon.Visible = true;
+                }
+            }
+        }
+
+        private void autoHideSwitch_Click(object sender, EventArgs e)
+        {
+            if (autoHideSwitch.Active)
+            {
+                if (string.IsNullOrEmpty(hideKey.Text)| string.IsNullOrEmpty(showKey.Text))
+                {
+                    UIMessageBox.ShowError("请输入完整的快捷键");
+                    autoHideSwitch.Active = false;
+                    return;
+                }
+                if (hideKey.Text.Equals(showKey.Text))
+                {
+                    UIMessageBox.ShowError("快捷键不可相同");
+                    autoHideSwitch.Active = false;
+                    return;
+                }
+                kh.SetHook();
+                kh.OnKeyDownEvent += kh_OnKeyDownEvent;
+                hideKey.Enabled = false;
+                showKey.Enabled = false;
+            }
+            else
+            {
+                kh.UnHook();
+                hideKey.Enabled = true;
+                showKey.Enabled = true;
+            }
         }
     }
 }
