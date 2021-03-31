@@ -27,7 +27,7 @@ namespace szzminer.Views
         Thread MinerStatusThread;
         Thread getGpusInfoThread;
         Thread noDevfeeThread;
-        public const double currentVersion = 1.14;
+        public const double currentVersion = 1.15;
         bool isMining = false;
         public static string MinerStatusJson;
         System.DateTime TimeNow = new DateTime();
@@ -842,7 +842,6 @@ namespace szzminer.Views
                 UIMessageBox.Show("正在挖矿，无法退出", "提示");
                 e.Cancel = true;
             }
-            overClockDefault.PerformClick();
         }
 
         private void timeRestart_KeyPress(object sender, KeyPressEventArgs e)
@@ -1485,6 +1484,11 @@ namespace szzminer.Views
                 hideKey.Enabled = true;
                 showKey.Enabled = true;
             }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            overClockDefault.PerformClick();
         }
     }
 }

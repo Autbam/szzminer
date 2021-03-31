@@ -6,10 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace DisplayDll
 {
-    public class Display
+    class Display
     {
         public List<string> BUSID { get; set; }
         public List<string> Hashrate { get; set; }
@@ -35,14 +34,14 @@ namespace DisplayDll
             Hashrate = new List<string>();
             Accepted = new List<string>();
             Rejected = new List<string>();
-            string json = getHtml("http://127.0.0.1:22333/api/v1/status");
-            nbminer nbminerInfo =  JsonConvert.DeserializeObject<nbminer>(json);
-            for(int gpuCount = 0; gpuCount < nbminerInfo.miner.devices.Count; gpuCount++)
+            string json = getHtml("http://127.0.0.1:22333/summary");
+            t_rex.t_rex trexInfo = JsonConvert.DeserializeObject<t_rex.t_rex>(json);
+            for (int gpuCount = 0; gpuCount < trexInfo.gpus.Count; gpuCount++)
             {
-                BUSID.Add(nbminerInfo.miner.devices[gpuCount].pci_bus_id.ToString());
-                Hashrate.Add(nbminerInfo.miner.devices[gpuCount].hashrate.Trim());
-                Accepted.Add(nbminerInfo.miner.devices[gpuCount].accepted_shares.ToString());
-                Rejected.Add(nbminerInfo.miner.devices[gpuCount].rejected_shares.ToString());
+                BUSID.Add(trexInfo.gpus[gpuCount].pci_bus.ToString());
+                Hashrate.Add(((double)(trexInfo.gpus[gpuCount].hashrate/1000000.0)).ToString("#0.00"));
+                Accepted.Add(trexInfo.stat_by_gpu[gpuCount].accepted_count.ToString());
+                Rejected.Add(trexInfo.stat_by_gpu[gpuCount].rejected_count.ToString());
             }
         }
         public List<string> getBUSID()
