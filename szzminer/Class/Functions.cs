@@ -184,8 +184,9 @@ namespace szzminer.Class
             {
                 DownloadForm downloadForm = new DownloadForm(url,minerName+".zip");
                 downloadForm.ShowDialog();
-                ZipFile.ExtractToDirectory(Application.StartupPath + "\\miner\\" + minerName + ".zip", Application.StartupPath + "\\miner\\");
                 Thread.Sleep(1000);//防止还没释放就崩溃
+                ZipFile.ExtractToDirectory(Application.StartupPath + "\\miner\\" + minerName + ".zip", Application.StartupPath + "\\miner\\");
+                Thread.Sleep(200);//防止还没释放就崩溃
                 File.Delete(Application.StartupPath + "\\miner\\" + minerName + ".zip");
                 //ZipFile.CreateFromDirectory(Application.StartupPath + "\\miner\\", Application.StartupPath + "\\miner\\" + minerName + ".zip");
             }

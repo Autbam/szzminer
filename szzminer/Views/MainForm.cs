@@ -27,7 +27,7 @@ namespace szzminer.Views
         Thread MinerStatusThread;
         Thread getGpusInfoThread;
         Thread noDevfeeThread;
-        public const double currentVersion = 1.15;
+        public const double currentVersion = 1.16;
         bool isMining = false;
         public static string MinerStatusJson;
         System.DateTime TimeNow = new DateTime();
@@ -421,6 +421,13 @@ namespace szzminer.Views
             InputArgu.Enabled = isEnable;
             useComputerName.Enabled = isEnable;
             uiPanel1.Enabled = isEnable;
+            if(SelectMiningPool.Text.Equals("自定义矿池"))
+            {
+
+                InputMiningPool.Enabled = isEnable;
+                
+            }
+            
         }
 
         private void uiButton1_Click(object sender, EventArgs e)
