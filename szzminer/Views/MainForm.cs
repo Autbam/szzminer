@@ -588,7 +588,7 @@ namespace szzminer.Views
                 }
                 catch (Exception ex)
                 {
-                    //LogOutput.AppendText(ex.ToString());
+                    //Functions.WriteLog(ex.ToString());
                 }
                 finally
                 {

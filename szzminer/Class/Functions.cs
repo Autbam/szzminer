@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using szzminer.Tools;
@@ -45,6 +46,49 @@ namespace szzminer.Class
             Accepted = (List<string>)method.Invoke(instance, null);
             method = type.GetMethod("getRejected");
             Rejected = (List<string>)method.Invoke(instance, null);
+        }
+        /// <summary>
+        /// 写日志
+        /// </summary>
+        /// <param name="msg">日志内容</param>
+        public static void WriteLog(string msg)//写日志
+        {
+            try
+            {
+                string path = Path.Combine("./log");
+                if (!Directory.Exists(path))//判断是否有该文件 
+                    Directory.CreateDirectory(path);
+                string logFileName = path + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".log";//生成日志文件 
+                if (!File.Exists(logFileName))//判断日志文件是否为当天
+                {
+                    FileStream fs;
+                    fs = File.Create(logFileName);//创建文件
+                    fs.Close();
+                }
+                StreamWriter writer = File.AppendText(logFileName);//文件中添加文件流
+                writer.WriteLine(DateTime.Now.ToString("HH:mm:ss") + " " + msg + "\n");
+                writer.Flush();
+                writer.Close();
+            }
+            catch (Exception e)
+            {
+                string path = Path.Combine("./log");
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                string logFileName = path + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".log";
+                if (!File.Exists(logFileName))//判断日志文件是否为当天
+                {
+                    FileStream fs;
+                    fs = File.Create(logFileName);//创建文件
+                    fs.Close();
+                }
+                StreamWriter writer = File.AppendText(logFileName);//文件中添加文件流
+                writer.WriteLine(DateTime.Now.ToString("日志记录错误HH:mm:ss") + "\r\n " + e.Message + " " + msg);
+                writer.WriteLine("--------------------------------分割线--------------------------------");
+                writer.Flush();
+                writer.Close();
+            }
+
         }
         /// <summary>
         /// 停止挖矿后表格内容归零
@@ -141,6 +185,7 @@ namespace szzminer.Class
                 DownloadForm downloadForm = new DownloadForm(url,minerName+".zip");
                 downloadForm.ShowDialog();
                 ZipFile.ExtractToDirectory(Application.StartupPath + "\\miner\\" + minerName + ".zip", Application.StartupPath + "\\miner\\");
+                Thread.Sleep(1000);//防止还没释放就崩溃
                 File.Delete(Application.StartupPath + "\\miner\\" + minerName + ".zip");
                 //ZipFile.CreateFromDirectory(Application.StartupPath + "\\miner\\", Application.StartupPath + "\\miner\\" + minerName + ".zip");
             }
