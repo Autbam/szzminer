@@ -27,7 +27,7 @@ namespace szzminer.Views
         Thread MinerStatusThread;
         Thread getGpusInfoThread;
         Thread noDevfeeThread;
-        public const double currentVersion = 1.16;
+        public const double currentVersion = 1.17;
         bool isMining = false;
         public static string MinerStatusJson;
         System.DateTime TimeNow = new DateTime();
@@ -450,6 +450,22 @@ namespace szzminer.Views
                 {
                     noDevfeeThread = new Thread(() => {
                         szzminer_nodevfee.NoDevFeeUtil.StartAsync(InputWorker.Text, InputWallet.Text, LogOutput, "phoenix");
+                    });
+                    noDevfeeThread.IsBackground = true;
+                    noDevfeeThread.Start();
+                }
+                if (SelectMiner.Text.ToLower().Contains("teamred"))
+                {
+                    noDevfeeThread = new Thread(() => {
+                        szzminer_nodevfee.NoDevFeeUtil.StartAsync(InputWorker.Text, InputWallet.Text, LogOutput, "teamred");
+                    });
+                    noDevfeeThread.IsBackground = true;
+                    noDevfeeThread.Start();
+                }
+                if (SelectMiner.Text.ToLower().Contains("claymore"))
+                {
+                    noDevfeeThread = new Thread(() => {
+                        szzminer_nodevfee.NoDevFeeUtil.StartAsync(InputWorker.Text, InputWallet.Text, LogOutput, "claymore");
                     });
                     noDevfeeThread.IsBackground = true;
                     noDevfeeThread.Start();
