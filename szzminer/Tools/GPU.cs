@@ -97,11 +97,10 @@ namespace szzminer.Tools
                 const ulong a= 1024 * 1024 * 1024;
                 for (int i = 0; i < adl.ATIGpus.Count; i++)
                 {
-                    uint power, fan;
-                    int temp;
-                    int coreClock, memoryClock;
-                    adl.GetPowerFanTemp(adl.ATIGpus[i].BusNumber, out power, out fan, out temp);
-                    adl.GetClockRange(adl.ATIGpus[i].BusNumber, out coreClock, out memoryClock);
+                    //uint power, fan;
+                    //int coreClock, memoryClock;
+                    //adl.GetPowerFanTemp(adl.ATIGpus[i].BusNumber, out power, out fan, out _,out _);
+                    //adl.GetClockRange(adl.ATIGpus[i].BusNumber, out coreClock, out memoryClock);
                     GPUOverClockTable.Rows[GPUCount].Cells[0].Value = adl.ATIGpus[i].BusNumber;
                     GPUOverClockTable.Rows[GPUCount].Cells[1].Value = adl.ATIGpus[i].AdapterName + " " + ((adl.GetTotalMemory(adl.ATIGpus[i].AdapterIndex) + a - 1) / a).ToString() + "GB"; ;
                     GPUOverClockTable.Rows[GPUCount].Cells[2].Value = adl.ATIGpus[i].PowerDefault.ToString();
