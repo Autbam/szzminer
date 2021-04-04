@@ -397,7 +397,7 @@ namespace szzminer.Views
             });
             GPU.addRow(ref GPUStatusTable, ref GPUOverClockTable);//为表格控件添加行
             GPU.getOverclockGPU(ref GPUOverClockTable);//读取显卡API获取显卡信息
-            Functions.getMiningInfo();
+            //Functions.getMiningInfo();
             Functions.loadCoinIni(ref SelectCoin);
             //SelectCoin.SelectedIndex = 0;
             //SelectMiner.SelectedIndex = 0;
@@ -1512,6 +1512,24 @@ namespace szzminer.Views
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             overClockDefault.PerformClick();
+        }
+
+        private void overClockWriteAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < GPUOverClockTable.Rows.Count; i++)
+            {
+                GPUOverClockTable.Rows[i].Cells[2].Value = GPUOverClockTable.Rows[0].Cells[2].Value;
+                GPUOverClockTable.Rows[i].Cells[3].Value = GPUOverClockTable.Rows[0].Cells[3].Value;
+                GPUOverClockTable.Rows[i].Cells[4].Value = GPUOverClockTable.Rows[0].Cells[4].Value;
+                if (!Convert.ToString(GPUOverClockTable.Rows[i].Cells[5].Value).Equals("N/A"))
+                    GPUOverClockTable.Rows[i].Cells[5].Value = GPUOverClockTable.Rows[0].Cells[5].Value;
+                GPUOverClockTable.Rows[i].Cells[6].Value = GPUOverClockTable.Rows[0].Cells[6].Value;
+                if (!Convert.ToString(GPUOverClockTable.Rows[i].Cells[7].Value).Equals("N/A"))
+                    GPUOverClockTable.Rows[i].Cells[7].Value = GPUOverClockTable.Rows[0].Cells[7].Value;
+                GPUOverClockTable.Rows[i].Cells[8].Value = GPUOverClockTable.Rows[0].Cells[8].Value;
+                if (!Convert.ToString(GPUOverClockTable.Rows[i].Cells[9].Value).Equals("N/A"))
+                    GPUOverClockTable.Rows[i].Cells[9].Value = GPUOverClockTable.Rows[0].Cells[9].Value;
+            }
         }
     }
 }

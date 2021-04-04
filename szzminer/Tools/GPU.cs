@@ -26,7 +26,8 @@ namespace szzminer.Tools
                     GPUStatusTable.Rows[GPUCount].Cells[0].Value = gpus[i].BusId;
                     GPUStatusTable.Rows[GPUCount].Cells[1].Value = "NVIDIA " + gpus[i].Name + " " + gpus[i].TotalMemory / 1024 / 1000 / 1000 + "GB";
                     GPUStatusTable.Rows[GPUCount].Cells[5].Value = nvmlHelper.GetPowerUsage(i);
-                    nvapiHelper.GetTemperature(gpus[i].BusId, out coretemp,out memtemp);
+                    nvapiHelper.GetCoreTemperature(gpus[i].BusId, out coretemp);
+                    nvapiHelper.GetMemTemperature(gpus[i].BusId,out memtemp);
                     GPUStatusTable.Rows[GPUCount].Cells[6].Value = coretemp.ToString()+"/"+memtemp.ToString();
                     GPUStatusTable.Rows[GPUCount].Cells[7].Value = nvmlHelper.GetFanSpeed(i);
                     GPUStatusTable.Rows[GPUCount].Cells[8].Value = nvmlHelper.GetCoreClock(i) + "Mhz";
