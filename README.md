@@ -8,3 +8,7 @@
 - Blog: https://www.ixigua.com/6947269102947795460
 - Github: https://github.com/Autbam/szzminer
 - QQ群: 902822275
+
+# 鸣谢
+感谢有SunnyUI提供的UI界面
+链接：https://gitee.com/yhuse/SunnyUI/
