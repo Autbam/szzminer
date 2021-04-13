@@ -4,8 +4,8 @@
 
 **松之宅矿工**是一款支持多币种，多内核，多矿池的显卡挖矿软件。
 
-
-- Blog: https://www.ixigua.com/6947269102947795460
+- 官网：http://topool.top/
+- Blog: http://blog.topool.top/
 - Github: https://github.com/Autbam/szzminer
 - QQ群: 902822275
 
