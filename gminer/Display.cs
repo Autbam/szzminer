@@ -7,9 +7,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DisplayDll
 {
-    public class Display
+    class Display
     {
         public List<string> BUSID { get; set; }
         public List<string> Hashrate { get; set; }
@@ -30,7 +31,7 @@ namespace DisplayDll
                 }
                 return pageHtml;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -42,24 +43,24 @@ namespace DisplayDll
             Hashrate = new List<string>();
             Accepted = new List<string>();
             Rejected = new List<string>();
-            string json = getHtml("http://127.0.0.1:22333/api/v1/status");
+            string json = getHtml("http://127.0.0.1:22333/stat");
             try
             {
-                nbminer nbminerInfo = JsonConvert.DeserializeObject<nbminer>(json);
-                for (int gpuCount = 0; gpuCount < nbminerInfo.miner.devices.Count; gpuCount++)
+                int oxbusid;
+                gminer.gminer nbminerInfo = JsonConvert.DeserializeObject<gminer.gminer>(json);
+                for (int gpuCount = 0; gpuCount < nbminerInfo.devices.Count; gpuCount++)
                 {
-                    BUSID.Add(nbminerInfo.miner.devices[gpuCount].pci_bus_id.ToString());
-                    Hashrate.Add(nbminerInfo.miner.devices[gpuCount].hashrate.Trim());
-                    Accepted.Add(nbminerInfo.miner.devices[gpuCount].accepted_shares.ToString());
-                    Rejected.Add(nbminerInfo.miner.devices[gpuCount].rejected_shares.ToString());
+                    oxbusid = int.Parse(nbminerInfo.devices[gpuCount].bus_id.Split(':')[1], System.Globalization.NumberStyles.HexNumber);
+                    
+                    BUSID.Add(oxbusid.ToString());
+                    Hashrate.Add((nbminerInfo.devices[gpuCount].speed/1000000.0).ToString("#0.00"));
+                    Accepted.Add(nbminerInfo.devices[gpuCount].accepted_shares.ToString());
+                    Rejected.Add(nbminerInfo.devices[gpuCount].rejected_shares.ToString());
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                StreamWriter streamWriter = File.CreateText("log.txt");
-                streamWriter.WriteLine(ex.ToString());
-                streamWriter.Flush();
-                streamWriter.Close();
+
             }
         }
         public List<string> getBUSID()

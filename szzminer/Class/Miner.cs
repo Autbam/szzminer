@@ -60,16 +60,23 @@ namespace szzminer.Class
 
         private static void 生成原版bat(string 启动参数)
         {
-            string 桌面路径 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\松之宅原版.bat";
-            StreamWriter 写入流 = new StreamWriter(桌面路径, false, System.Text.Encoding.GetEncoding("gb2312"));
-            写入流.WriteLine("@echo off");
-            写入流.WriteLine("echo 该文件由松之宅挖矿者(topool.top)自动生成, 仅供排查错误使用。");
-            写入流.WriteLine("echo 使用之前请先停止挖矿，否则可能同时运行两个内核导致查错失败。");
-            写入流.WriteLine("echo 启动参数：" +  启动参数);
-            写入流.WriteLine(启动参数);
-            写入流.WriteLine("pause");
-            写入流.Flush();
-            写入流.Close();
+            try
+            {
+                string 桌面路径 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\松之宅原版.bat";
+                StreamWriter 写入流 = new StreamWriter(桌面路径, false, System.Text.Encoding.GetEncoding("gb2312"));
+                写入流.WriteLine("@echo off");
+                写入流.WriteLine("echo 该文件由松之宅挖矿者(topool.top)自动生成, 仅供排查错误使用。");
+                写入流.WriteLine("echo 使用之前请先停止挖矿，否则可能同时运行两个内核导致查错失败。");
+                写入流.WriteLine("echo 启动参数：" + 启动参数);
+                写入流.WriteLine(启动参数);
+                写入流.WriteLine("pause");
+                写入流.Flush();
+                写入流.Close();
+            }
+            catch(Exception ex)
+            {
+                LOG.WriteLog(ex.ToString());
+            }
             //Application.StartupPath + @"\nbminer.exe"
         }
 

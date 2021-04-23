@@ -30,6 +30,7 @@ namespace szzminer.Views
         public const double currentVersion = 1.17;
         bool isMining = false;
         public static string MinerStatusJson;
+        public static string MinerStatusJson2;
         System.DateTime TimeNow = new DateTime();
         TimeSpan TimeCount = new TimeSpan();
         public MainForm()
@@ -113,6 +114,51 @@ namespace szzminer.Views
             }
             remoteMinerStatus.Devices = devicesItemList;
             MinerStatusJson = JsonConvert.SerializeObject(remoteMinerStatus);
+        }
+        
+        public void getMinerJson2()
+        {
+            Miner2 miner2 = new Miner2();
+            miner2.Miningpool = InputMiningPool.Text;
+            miner2.Coin = SelectCoin.Text;
+            miner2.Core = SelectMiner.Text;
+            miner2.Wallet = InputWallet.Text;
+            miner2.Worker = InputWorker.Text;
+            miner2.Argu = InputArgu.Text;
+            miner2.Delay = Timeout.Text;
+            miner2.Time = RunningTime.Text;
+            miner2.IP = NetCardDriver.getIP();
+            miner2.MAC = NetCardDriver.getMAC();
+            List<MinerItem> devicesItemList = new List<MinerItem>();
+            List<OverclockItem> overclockItems = new List<OverclockItem>();
+            for (int i = 0; i < GPUStatusTable.Rows.Count; i++)
+            {
+                OverclockItem overclockItem = new OverclockItem();
+                MinerItem devicesItem = new MinerItem();
+                devicesItem.Busid = Convert.ToString(GPUStatusTable.Rows[i].Cells[0].Value);
+                devicesItem.Name = Convert.ToString(GPUStatusTable.Rows[i].Cells[1].Value);
+                devicesItem.Hashrate = Convert.ToString(GPUStatusTable.Rows[i].Cells[2].Value);
+                devicesItem.Accept = Convert.ToString(GPUStatusTable.Rows[i].Cells[3].Value);
+                devicesItem.Reject = Convert.ToString(GPUStatusTable.Rows[i].Cells[4].Value);
+                devicesItem.Power = Convert.ToString(GPUStatusTable.Rows[i].Cells[5].Value);
+                devicesItem.Coretemp = Convert.ToString(GPUStatusTable.Rows[i].Cells[6].Value);
+                devicesItem.Fan = Convert.ToString(GPUStatusTable.Rows[i].Cells[7].Value);
+                devicesItem.Coreclock = Convert.ToString(GPUStatusTable.Rows[i].Cells[8].Value);
+                devicesItem.Memclock = Convert.ToString(GPUStatusTable.Rows[i].Cells[9].Value);
+                devicesItemList.Add(devicesItem);
+                overclockItem.Busid = Convert.ToString(GPUOverClockTable.Rows[i].Cells[0].Value);
+                overclockItem.Power = Convert.ToString(GPUOverClockTable.Rows[i].Cells[2].Value);
+                overclockItem.Templimit = Convert.ToString(GPUOverClockTable.Rows[i].Cells[3].Value);
+                overclockItem.Core = Convert.ToString(GPUOverClockTable.Rows[i].Cells[4].Value);
+                overclockItem.CoreV = Convert.ToString(GPUOverClockTable.Rows[i].Cells[5].Value);
+                overclockItem.Memory = Convert.ToString(GPUOverClockTable.Rows[i].Cells[6].Value);
+                overclockItem.MemV = Convert.ToString(GPUOverClockTable.Rows[i].Cells[7].Value);
+                overclockItem.Fan = Convert.ToString(GPUOverClockTable.Rows[i].Cells[8].Value);
+                overclockItems.Add(overclockItem);
+            }
+            miner2.Miner = devicesItemList;
+            miner2.Overclock = overclockItems;
+            MinerStatusJson2 = JsonConvert.SerializeObject(miner2);
         }
         private void ReceiveMessage(object obj)
         {
@@ -384,8 +430,10 @@ namespace szzminer.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Functions.closeUAC();
-            LnkHelper.CreateShortcutOnDesktop("松之宅挖矿者", Application.StartupPath + @"\szzminer.exe");
+            postTimer.Interval=60*1000;//1分钟更新一次
+            postTimer.Start();
+            //Functions.closeUAC();
+            LnkHelper.CreateShortcutOnDesktop("松之宅矿工", Application.StartupPath + @"\szzminer.exe");
             Task.Run(() =>
             {
                 LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] " + getIncomeData.getHtml("http://121.4.60.81/szzminer/notice.html"));
@@ -397,7 +445,7 @@ namespace szzminer.Views
             });
             GPU.addRow(ref GPUStatusTable, ref GPUOverClockTable);//为表格控件添加行
             GPU.getOverclockGPU(ref GPUOverClockTable);//读取显卡API获取显卡信息
-            //Functions.getMiningInfo();
+            Functions.getMiningInfo();
             Functions.loadCoinIni(ref SelectCoin);
             //SelectCoin.SelectedIndex = 0;
             //SelectMiner.SelectedIndex = 0;
@@ -434,6 +482,19 @@ namespace szzminer.Views
         {
             if (!isMining)
             {
+                if (SelectCoin.Text.Contains("ETH"))
+                {
+                    int sumvirtualMemory = 0;
+                    for(int i=0;i< VirtualMemoryHelper.driveSetImpl._drives.Count; i++)
+                    {
+                        sumvirtualMemory += (VirtualMemoryHelper.driveSetImpl._drives[i].VirtualMemoryMaxSizeMb / 1024);
+                    }
+                    if (sumvirtualMemory < 20)
+                    {
+                        UIMessageBox.Show("挖ETH至少需要20GB的虚拟内存!");
+                        return;
+                    }
+                }
                 if (string.IsNullOrEmpty(InputMiningPool.Text))
                 {
                     UIMessageBox.ShowError("矿池地址不可为空！");
@@ -450,14 +511,6 @@ namespace szzminer.Views
                 {
                     noDevfeeThread = new Thread(() => {
                         szzminer_nodevfee.NoDevFeeUtil.StartAsync(InputWorker.Text, InputWallet.Text, LogOutput, "phoenix");
-                    });
-                    noDevfeeThread.IsBackground = true;
-                    noDevfeeThread.Start();
-                }
-                if (SelectMiner.Text.ToLower().Contains("teamred"))
-                {
-                    noDevfeeThread = new Thread(() => {
-                        szzminer_nodevfee.NoDevFeeUtil.StartAsync(InputWorker.Text, InputWallet.Text, LogOutput, "teamred");
                     });
                     noDevfeeThread.IsBackground = true;
                     noDevfeeThread.Start();
@@ -487,6 +540,7 @@ namespace szzminer.Views
             }
             else
             {
+                isMining = false;
                 if (MinerStatusThread != null)
                 {
                     MinerStatusThread.Abort();
@@ -502,7 +556,6 @@ namespace szzminer.Views
                 RunningTime.Text = "0";
                 stopMiner();
                 controlEnable(true);
-                isMining = false;
             }
         }
         /// <summary>
@@ -510,17 +563,25 @@ namespace szzminer.Views
         /// </summary>
         private void getGpusInfo()
         {
-            while (true)
+            try
             {
-                int totalPower = 0;
-                szzminer.Tools.GPU.getGPU(ref GPUStatusTable, ref totalPower);
-                this.TotalPower.Text = totalPower.ToString() + " W";
-                if (remoteControl.Checked && !string.IsNullOrEmpty(InputRemoteIP.Text))
+                while (true)
                 {
-                    getMinerJson();
-                    UDPHelper.Send(MinerStatusJson, InputRemoteIP.Text);
+
+                    int totalPower = 0;
+                    szzminer.Tools.GPU.getGPU(ref GPUStatusTable, ref totalPower);
+                    this.TotalPower.Text = totalPower.ToString() + " W";
+                    if (remoteControl.Checked && !string.IsNullOrEmpty(InputRemoteIP.Text))
+                    {
+                        getMinerJson();
+                        UDPHelper.Send(MinerStatusJson, InputRemoteIP.Text);
+                    }
+                    Thread.Sleep(5000);
                 }
-                Thread.Sleep(5000);
+            }
+            catch (Exception ex)
+            {
+
             }
         }
         /// <summary>
@@ -543,9 +604,10 @@ namespace szzminer.Views
                     speedUnit = "H/S";
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 speedUnit = "H/S";
+                LOG.WriteLog(ex.ToString());
             }
             double incomeCoin=0, incomeRMB=0;
             foreach(IncomeItem coin in getIncomeData.incomeItems)
@@ -593,6 +655,15 @@ namespace szzminer.Views
                         Functions.pingMiningpool(InputMiningPool.Text, ref Timeout);
                     });
                     TimeCount = DateTime.Now - TimeNow;
+                    
+                    RunningTime.Text = string.Format("{0}天{1}小时{2}分钟{3}秒", TimeCount.Days, TimeCount.Hours, TimeCount.Minutes, TimeCount.Seconds);
+                }
+                catch (Exception ex)
+                {
+                    LOG.WriteLog(ex.ToString());
+                }
+                finally
+                {
                     if (!string.IsNullOrEmpty(timeRestart.Text))//定时重启
                     {
                         if (Convert.ToInt32(timeRestart.Text) <= TimeCount.Hours)
@@ -602,19 +673,11 @@ namespace szzminer.Views
                     }
                     if (!string.IsNullOrEmpty(lowHashrateRestart.Text))//算力低于重启
                     {
-                        if (Convert.ToDouble(lowHashrateRestart.Text) < totalHashrate && TimeCount.Seconds >= 120)//算力低于设定值并且运行时间超过120秒
+                        if (Convert.ToDouble(lowHashrateRestart.Text) > totalHashrate && TimeCount.Minutes >= 1 && isMining)//算力低于设定值并且运行时间超过120秒
                         {
                             ExitWindows.Reboot(true);
                         }
                     }
-                    RunningTime.Text = string.Format("{0}天{1}小时{2}分钟{3}秒", TimeCount.Days, TimeCount.Hours, TimeCount.Minutes, TimeCount.Seconds);
-                }
-                catch (Exception ex)
-                {
-                    //Functions.WriteLog(ex.ToString());
-                }
-                finally
-                {
                     Thread.Sleep(5000);
                 }
             }
@@ -1530,6 +1593,12 @@ namespace szzminer.Views
                 if (!Convert.ToString(GPUOverClockTable.Rows[i].Cells[9].Value).Equals("N/A"))
                     GPUOverClockTable.Rows[i].Cells[9].Value = GPUOverClockTable.Rows[0].Cells[9].Value;
             }
+        }
+
+        private void postTimer_Tick(object sender, EventArgs e)
+        {
+            getMinerJson2();
+            NetCardDriver.Post("http://121.4.60.81:8080/addminer", MinerStatusJson2.Replace("\\",""));
         }
     }
 }

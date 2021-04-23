@@ -13,7 +13,7 @@ namespace szzminer.Tools
 {
     class VirtualMemoryHelper
     {
-        static DriveSetImpl driveSetImpl = new DriveSetImpl();
+        public static DriveSetImpl driveSetImpl = new DriveSetImpl();
         public static void getVirtualMemoryInfo(ref UIComboBox disk)
         {
             for (int i = 0; i < driveSetImpl._drives.Count; i++)

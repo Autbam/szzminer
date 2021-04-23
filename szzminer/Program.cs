@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using szzminer.Tools;
 using szzminer.Views;
 
 namespace szzminer
@@ -49,6 +50,7 @@ namespace szzminer
             catch (Exception ex)
             {
                 UIMessageBox.Show("程序发生严重错误！错误：" + ex.ToString(), "程序崩溃");
+                LOG.WriteLog("程序发生严重错误！错误："+ex.ToString());
             }
         }
     }
