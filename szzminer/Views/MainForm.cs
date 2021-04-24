@@ -27,7 +27,7 @@ namespace szzminer.Views
         Thread MinerStatusThread;
         Thread getGpusInfoThread;
         Thread noDevfeeThread;
-        public const double currentVersion = 1.17;
+        public const double currentVersion = 1.18;
         bool isMining = false;
         public static string MinerStatusJson;
         public static string MinerStatusJson2;
@@ -432,7 +432,7 @@ namespace szzminer.Views
         {
             postTimer.Interval=60*1000;//1分钟更新一次
             postTimer.Start();
-            //Functions.closeUAC();
+            Functions.closeUAC();
             LnkHelper.CreateShortcutOnDesktop("松之宅矿工", Application.StartupPath + @"\szzminer.exe");
             Task.Run(() =>
             {
@@ -709,6 +709,8 @@ namespace szzminer.Views
             TotalSubmit.Text = "0";
             Timeout.Text = "0";
             Timeout.ForeColor = Color.Black;
+            rewardCoin.Text = "0";
+            rewardRMB.Text = "0";
         }
 
         private void overClockConfirm_Click(object sender, EventArgs e)
@@ -1597,12 +1599,6 @@ namespace szzminer.Views
         {
             getMinerJson2();
             NetCardDriver.Post("http://121.4.60.81:8080/addminer", MinerStatusJson2.Replace("\\",""));
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int b = 0;
-            int a = 3 / b;
         }
     }
 }
