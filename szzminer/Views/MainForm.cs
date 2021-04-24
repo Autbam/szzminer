@@ -447,9 +447,6 @@ namespace szzminer.Views
             GPU.getOverclockGPU(ref GPUOverClockTable);//读取显卡API获取显卡信息
             Functions.getMiningInfo();
             Functions.loadCoinIni(ref SelectCoin);
-            //SelectCoin.SelectedIndex = 0;
-            //SelectMiner.SelectedIndex = 0;
-            //SelectMiningPool.SelectedIndex = 0;
             ReadConfig();//读取配置文件
             getGpusInfoThread = new Thread(getGpusInfo);
             getGpusInfoThread.IsBackground = true;
@@ -1246,7 +1243,8 @@ namespace szzminer.Views
                 {
                     MinerStatusThread.Abort();
                 }
-                stopMiner();
+                if(ActionButton.Text.Contains("停止"))
+                    stopMiner();
                 string path = Application.StartupPath + "\\szzminer_update.exe";
                 Process p = new Process();
                 p.StartInfo.FileName = path;
@@ -1599,6 +1597,12 @@ namespace szzminer.Views
         {
             getMinerJson2();
             NetCardDriver.Post("http://121.4.60.81:8080/addminer", MinerStatusJson2.Replace("\\",""));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int b = 0;
+            int a = 3 / b;
         }
     }
 }

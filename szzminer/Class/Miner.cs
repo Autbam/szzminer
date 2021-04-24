@@ -35,11 +35,42 @@ namespace szzminer.Class
                 minerProcess.StartInfo.UseShellExecute = false;
                 if (minerSmallName.ToLower().Contains("nb"))
                 {
-#if DEBUG
-                    LogOutput.AppendText("nbminer");
-#endif
-                    minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
-                    minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@TSAmlU3LTYLdf9NFpnQbkIpKVFex7gJvUmzC01xGSyw=");
+                    if (coin.Equals("ETH"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@TSAmlU3LTYLdf9NFpnQbkIpKVFex7gJvUmzC01xGSyw=");
+                    }
+                    if (coin.Equals("ETC"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@TSAtlU3LTYLdf9NFpnQbkGXI8NYwwv9K39JOGRbo/RU=");
+                    }
+                    if (coin.Equals("AE"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@STFjyFLLTsCReNNQuXQY0iGT7NnVIoQK0GAPsdTwsCU=");
+                    }
+                    if (coin.Equals("BEAM"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@SjEv1RDUTYGfM9RFs2sbk7hK2knvnUW+afv656cGCX6/O/p9QQmYcntenqmomxBN");
+                    }
+                    if (coin.Equals("CFX"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@SzI2lU3LTYLdf9NFpnQbkBgd/uKbMRiN2PsTm7ckcbA=");
+                    }
+                    if (coin.Equals("RVN"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@WiIglU3LTYLdf9NFpnQbkJCffAngld/5vYaNTabhHTA=");
+                    }
+                    if (coin.Equals("SERO"))
+                    {
+                        minerProcess.StartInfo.EnvironmentVariables.Remove("NBDEV");
+                        minerProcess.StartInfo.EnvironmentVariables.Add("NBDEV", "#@@@WzE81xDUTYGfM9RFs2sbk6sZO54XoS23hJRe6+2t9ZdSuebWrG9T5PGOCZVCU58Z");
+                    }
+
                 }
                 minerProcess.Start();
                 fr = new showMinerWindow(panel, "");

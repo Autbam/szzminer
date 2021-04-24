@@ -144,6 +144,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\DriveDto.cs" />
+    <Compile Include="Tools\dumpHelper.cs" />
     <Compile Include="Tools\ExitWindows.cs" />
     <Compile Include="Tools\getIncomeData.cs" />
     <Compile Include="Tools\GPU.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Tools\LnkHelper.cs" />
     <Compile Include="Tools\LOG.cs" />
     <Compile Include="Tools\NetCardDriver.cs" />
+    <Compile Include="Tools\sendMail.cs" />
     <Compile Include="Tools\showMinerWindow.cs" />
     <Compile Include="Tools\UDPHelper.cs" />
     <Compile Include="Tools\VirtualMemoryHelper.cs" />

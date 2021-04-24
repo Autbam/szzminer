@@ -29,7 +29,7 @@ namespace szzminer
                 if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
                 {
                     //如果是管理员，则直接运行
-
+                    AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((obj, args) => dumpHelper.TryDump("error.dmp"));
                     Application.EnableVisualStyles();
                     Application.Run(new MainForm());
                 }
@@ -51,7 +51,12 @@ namespace szzminer
             {
                 UIMessageBox.Show("程序发生严重错误！错误：" + ex.ToString(), "程序崩溃");
                 LOG.WriteLog("程序发生严重错误！错误："+ex.ToString());
+                if (UIMessageBox.ShowAsk("程序崩溃，是否要发送服务信息给作者，以帮助作者更好的完善软件？"))
+                {
+                    sendMail.sendmail("szzminer@126.com", "松之宅矿工", "szzminer@qq.com", "松之宅矿工QQ", "dump文件提交", string.Concat(System.AppDomain.CurrentDomain.BaseDirectory, "error.dmp"), "error.dmp", "smtp.126.com", "szzminer@126.com", "VEABHRROROCBHXNQ");
+                }
             }
         }
+
     }
 }

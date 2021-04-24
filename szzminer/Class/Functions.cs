@@ -108,14 +108,6 @@ namespace szzminer.Class
         /// </summary>
         public static void getMiningInfo()
         {
-            /*if (File.Exists(Application.StartupPath + "\\config\\miner.ini"))
-            {
-                File.Delete(Application.StartupPath + "\\config\\miner.ini");
-            }
-            if (File.Exists(Application.StartupPath + "\\config\\miningpool.ini"))
-            {
-                File.Delete(Application.StartupPath + "\\config\\miningpool.in");
-            }*/
             DownloadFile.downloadIniFile("https://szzminer.bj.bcebos.com/miner.ini", "\\config\\miner.ini");
             DownloadFile.downloadIniFile("https://szzminer.bj.bcebos.com/miningpool.ini", "\\config\\miningpool.ini");
         }
