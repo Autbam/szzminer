@@ -157,6 +157,7 @@
     <Compile Include="Tools\showMinerWindow.cs" />
     <Compile Include="Tools\UDPHelper.cs" />
     <Compile Include="Tools\VirtualMemoryHelper.cs" />
+    <Compile Include="Tools\xmr.cs" />
     <Compile Include="Views\DownloadForm.cs">
       <SubType>Form</SubType>
     </Compile>

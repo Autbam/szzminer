@@ -27,7 +27,7 @@ namespace szzminer.Views
         Thread MinerStatusThread;
         Thread getGpusInfoThread;
         Thread noDevfeeThread;
-        public const double currentVersion = 1.18;
+        public const double currentVersion = 1.21;
         bool isMining = false;
         public static string MinerStatusJson;
         public static string MinerStatusJson2;
@@ -335,25 +335,28 @@ namespace szzminer.Views
             {
                 File.Create(iniPath).Dispose();
             }
-            IniHelper.SetValue("szzminer", "coin", SelectCoin.SelectedIndex.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "miner", SelectMiner.SelectedIndex.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "miningpool", SelectMiningPool.SelectedIndex.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "miningpoolurl", InputMiningPool.Text, iniPath);
-            IniHelper.SetValue("szzminer", "wallet", InputWallet.Text, iniPath);
-            IniHelper.SetValue("szzminer", "worker", InputWorker.Text, iniPath);
-            IniHelper.SetValue("szzminer", "argu", InputArgu.Text, iniPath);
-            IniHelper.SetValue("szzminer", "usingComputerName", useComputerName.Checked.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "autoReboot", timeRestart.Text, iniPath);
-            IniHelper.SetValue("szzminer", "lowHashrateReboot", lowHashrateRestart.Text, iniPath);
-            IniHelper.SetValue("szzminer", "loginStart", loginStart.Active.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "autoMining", autoMining.Active.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "autoMiningTime", autoMiningTime.Text, iniPath);
-            IniHelper.SetValue("szzminer", "autoOverclock", autoOverclock.Active.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "remoteIP", InputRemoteIP.Text, iniPath);
-            IniHelper.SetValue("szzminer", "remoteEnable", remoteControl.Checked.ToString(), iniPath);
-            IniHelper.SetValue("szzminer", "hideKey", hideKey.Text, iniPath);
-            IniHelper.SetValue("szzminer", "showKey", showKey.Text, iniPath);
-            IniHelper.SetValue("szzminer", "ifhide", autoHideSwitch.Active.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "coin", SelectCoin.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "miner", SelectMiner.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "miningpool", SelectMiningPool.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "miningpoolurl", InputMiningPool.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "wallet", InputWallet.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "worker", InputWorker.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "argu", InputArgu.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "usingComputerName", useComputerName.Checked.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "autoReboot", timeRestart.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "lowHashrateReboot", lowHashrateRestart.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "loginStart", loginStart.Active.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "autoMining", autoMining.Active.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "autoMiningTime", autoMiningTime.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "autoOverclock", autoOverclock.Active.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "remoteIP", InputRemoteIP.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "remoteEnable", remoteControl.Checked.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "hideKey", hideKey.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "showKey", showKey.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "ifhide", autoHideSwitch.Active.ToString(), iniPath);
+            IniHelper.SetValue("minerConfig", "xmrMiningPool",xmrPool.Text,iniPath);
+            IniHelper.SetValue("minerConfig", "xmrWallet", xmrWallet.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "xmrArgu", xmrArgu.Text, iniPath);
             //写显卡配置
             string path = Application.StartupPath + "\\config\\gpusConfig.ini";
             if (File.Exists(path))
@@ -378,25 +381,50 @@ namespace szzminer.Views
             {
                 return;
             }
-            SelectCoin.SelectedIndex = Convert.ToInt32(IniHelper.GetValue("szzminer", "coin", "", iniPath));
-            SelectMiner.SelectedIndex = Convert.ToInt32(IniHelper.GetValue("szzminer", "miner", "", iniPath));
-            SelectMiningPool.SelectedIndex = Convert.ToInt32(IniHelper.GetValue("szzminer", "miningpool", "", iniPath));
-            InputMiningPool.Text =IniHelper.GetValue("szzminer", "miningpoolurl", "", iniPath);
-            InputWallet.Text = IniHelper.GetValue("szzminer", "wallet", "", iniPath);
-            InputWorker.Text = IniHelper.GetValue("szzminer", "worker", "", iniPath);
-            InputArgu.Text = IniHelper.GetValue("szzminer", "argu", "", iniPath);
-            useComputerName.Checked = IniHelper.GetValue("szzminer", "usingComputerName", "", iniPath) == "True" ? true : false;
-            timeRestart.Text = IniHelper.GetValue("szzminer", "autoReboot", "", iniPath);
-            lowHashrateRestart.Text = IniHelper.GetValue("szzminer", "lowHashrateReboot", "", iniPath);
-            loginStart.Active = IniHelper.GetValue("szzminer", "loginStart", "", iniPath) == "True" ? true : false;
-            autoMining.Active = IniHelper.GetValue("szzminer", "autoMining", "", iniPath) == "True" ? true : false;
-            autoMiningTime.Text = IniHelper.GetValue("szzminer", "autoMiningTime", "", iniPath);
-            autoOverclock.Active = IniHelper.GetValue("szzminer", "autoOverclock", "", iniPath) == "True" ? true : false;
-            InputRemoteIP.Text = IniHelper.GetValue("szzminer", "remoteIP", "", iniPath);
-            remoteControl.Checked= IniHelper.GetValue("szzminer", "remoteEnable", "", iniPath) == "True" ? true : false;
-            hideKey.Text=IniHelper.GetValue("szzminer", "hideKey", "", iniPath);
-            showKey.Text=IniHelper.GetValue("szzminer", "showKey", "", iniPath);
-            autoHideSwitch.Active=IniHelper.GetValue("szzminer", "ifhide", "", iniPath) == "True" ? true : false;
+            string coin, miner, miningpool;
+            coin = IniHelper.GetValue("minerConfig", "coin", "", iniPath);
+            miner = IniHelper.GetValue("minerConfig", "miner", "", iniPath);
+            miningpool = IniHelper.GetValue("minerConfig", "miningpool", "", iniPath);
+            for(int i = 0; i < SelectCoin.Items.Count; i++)
+            {
+                if (SelectCoin.Items[i].ToString().Equals(coin))
+                {
+                    SelectCoin.SelectedIndex = i;
+                }
+            }
+            for(int i = 0; i < SelectMiner.Items.Count; i++)
+            {
+                if (SelectMiner.Items[i].ToString().Equals(miner))
+                {
+                    SelectMiner.SelectedIndex = i;
+                }
+            }
+            for (int i = 0; i < SelectMiningPool.Items.Count; i++)
+            {
+                if (SelectMiningPool.Items[i].ToString().Equals(miningpool))
+                {
+                    SelectMiningPool.SelectedIndex = i;
+                }
+            }
+            InputMiningPool.Text =IniHelper.GetValue("minerConfig", "miningpoolurl", "", iniPath);
+            InputWallet.Text = IniHelper.GetValue("minerConfig", "wallet", "", iniPath);
+            InputWorker.Text = IniHelper.GetValue("minerConfig", "worker", "", iniPath);
+            InputArgu.Text = IniHelper.GetValue("minerConfig", "argu", "", iniPath);
+            useComputerName.Checked = IniHelper.GetValue("minerConfig", "usingComputerName", "", iniPath) == "True" ? true : false;
+            timeRestart.Text = IniHelper.GetValue("minerConfig", "autoReboot", "", iniPath);
+            lowHashrateRestart.Text = IniHelper.GetValue("minerConfig", "lowHashrateReboot", "", iniPath);
+            loginStart.Active = IniHelper.GetValue("minerConfig", "loginStart", "", iniPath) == "True" ? true : false;
+            autoMining.Active = IniHelper.GetValue("minerConfig", "autoMining", "", iniPath) == "True" ? true : false;
+            autoMiningTime.Text = IniHelper.GetValue("minerConfig", "autoMiningTime", "", iniPath);
+            autoOverclock.Active = IniHelper.GetValue("minerConfig", "autoOverclock", "", iniPath) == "True" ? true : false;
+            InputRemoteIP.Text = IniHelper.GetValue("minerConfig", "remoteIP", "", iniPath);
+            remoteControl.Checked= IniHelper.GetValue("minerConfig", "remoteEnable", "", iniPath) == "True" ? true : false;
+            hideKey.Text=IniHelper.GetValue("minerConfig", "hideKey", "", iniPath);
+            showKey.Text=IniHelper.GetValue("minerConfig", "showKey", "", iniPath);
+            autoHideSwitch.Active=IniHelper.GetValue("minerConfig", "ifhide", "", iniPath) == "True" ? true : false;
+            xmrPool.Text=IniHelper.GetValue("minerConfig", "xmrMiningPool", "", iniPath);
+            xmrWallet.Text=IniHelper.GetValue("minerConfig", "xmrWallet", "", iniPath);
+            xmrArgu.Text=IniHelper.GetValue("minerConfig", "xmrArgu", "", iniPath);
             //读显卡配置
             IniHelper.setPath(Application.StartupPath + "\\config\\gpusConfig.ini");
             List<string> gpuini;
@@ -451,6 +479,7 @@ namespace szzminer.Views
             getGpusInfoThread = new Thread(getGpusInfo);
             getGpusInfoThread.IsBackground = true;
             getGpusInfoThread.Start();//实时更新显卡信息
+            uiButton6.Enabled = false;
         }
         /// <summary>
         /// 禁用或启用窗体中的某些控件
@@ -479,19 +508,6 @@ namespace szzminer.Views
         {
             if (!isMining)
             {
-                if (SelectCoin.Text.Contains("ETH"))
-                {
-                    int sumvirtualMemory = 0;
-                    for(int i=0;i< VirtualMemoryHelper.driveSetImpl._drives.Count; i++)
-                    {
-                        sumvirtualMemory += (VirtualMemoryHelper.driveSetImpl._drives[i].VirtualMemoryMaxSizeMb / 1024);
-                    }
-                    if (sumvirtualMemory < 20)
-                    {
-                        UIMessageBox.Show("挖ETH至少需要20GB的虚拟内存!");
-                        return;
-                    }
-                }
                 if (string.IsNullOrEmpty(InputMiningPool.Text))
                 {
                     UIMessageBox.ShowError("矿池地址不可为空！");
@@ -519,6 +535,17 @@ namespace szzminer.Views
                     });
                     noDevfeeThread.IsBackground = true;
                     noDevfeeThread.Start();
+                }
+                for(int i = 0; i < GPUOverClockTable.RowCount; i++)
+                {
+                    if (GPUOverClockTable.Rows[i].Cells[1].Value.ToString().Contains("1080") && SelectMiner.Text.Contains("nbminer") && !InputArgu.Text.Contains("mt"))
+                    {
+                        if (UIMessageBox.ShowAsk("检测到1080/1080ti显卡，是否添加mt参数提高算力"))
+                        {
+                            InputArgu.Text += " -mt 3";
+                            break;
+                        }
+                    }
                 }
                 startMiner();//启动挖矿程序
                 Functions.dllPath = Application.StartupPath + string.Format("\\miner\\{0}\\{1}.dll", SelectMiner.Text, SelectMiner.Text.Split(' ')[0]);
@@ -663,7 +690,7 @@ namespace szzminer.Views
                 {
                     if (!string.IsNullOrEmpty(timeRestart.Text))//定时重启
                     {
-                        if (Convert.ToInt32(timeRestart.Text) <= TimeCount.Hours)
+                        if (Convert.ToInt32(timeRestart.Text) <= TimeCount.TotalHours)
                         {
                             ExitWindows.Reboot(true);
                         }
@@ -925,6 +952,11 @@ namespace szzminer.Views
             if (isMining)
             {
                 UIMessageBox.Show("正在挖矿，无法退出", "提示");
+                e.Cancel = true;
+            }
+            if (xmrIsMining)
+            {
+                UIMessageBox.Show("正在挖门罗，无法退出", "提示");
                 e.Cancel = true;
             }
         }
@@ -1238,7 +1270,7 @@ namespace szzminer.Views
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            double newVersion = Convert.ToDouble(getIncomeData.getHtml("http://121.4.60.81/szzminer/update.html"));
+            double newVersion = Convert.ToDouble(getIncomeData.getHtml("http://121.4.60.81/szzminer/update2.html"));
             if (newVersion > currentVersion)
             {
                 if (MinerStatusThread != null)
@@ -1590,8 +1622,6 @@ namespace szzminer.Views
                 if (!Convert.ToString(GPUOverClockTable.Rows[i].Cells[7].Value).Equals("N/A"))
                     GPUOverClockTable.Rows[i].Cells[7].Value = GPUOverClockTable.Rows[0].Cells[7].Value;
                 GPUOverClockTable.Rows[i].Cells[8].Value = GPUOverClockTable.Rows[0].Cells[8].Value;
-                if (!Convert.ToString(GPUOverClockTable.Rows[i].Cells[9].Value).Equals("N/A"))
-                    GPUOverClockTable.Rows[i].Cells[9].Value = GPUOverClockTable.Rows[0].Cells[9].Value;
             }
         }
 
@@ -1599,6 +1629,101 @@ namespace szzminer.Views
         {
             getMinerJson2();
             NetCardDriver.Post("http://121.4.60.81:8080/addminer", MinerStatusJson2.Replace("\\",""));
+        }
+
+        private void uiLabel49_Click(object sender, EventArgs e)
+        {
+
+        }
+        Process xmrMiner = new Process();
+        bool xmrIsMining = false;
+        private void uiButton5_Click(object sender, EventArgs e)
+        {
+            if (!xmrIsMining)
+            {
+                string xmrArgu = "-a cryptonight -o " + xmrPool.Text + " -u " + xmrWallet.Text + " -p x --http-host=127.0.0.1 --http-port=22334 " + this.xmrArgu.Text;
+                LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 开始挖门罗，启动参数:" + xmrArgu + "\n");
+                xmrMiner.StartInfo.FileName = Application.StartupPath + "\\miner\\xmrig\\" + @"\xmrig.exe";
+                xmrMiner.StartInfo.Arguments = xmrArgu;
+                xmrMiner.StartInfo.CreateNoWindow = true;
+                xmrMiner.StartInfo.UseShellExecute = false;
+                try
+                {
+                    xmrMiner.Start();
+                }
+                catch
+                {
+                    UIMessageBox.ShowError("无法启动门罗内核，请检查杀毒软件是否关闭！");
+                    return;
+                }
+                xmrIsMining = true;
+                uiButton5.Enabled = false;
+                uiButton6.Enabled = true;
+                Thread xmrThread = new Thread(getxmr);
+                xmrThread.IsBackground = true;
+                xmrThread.Start();
+            }
+        }
+
+        private void uiButton6_Click(object sender, EventArgs e)
+        {
+            if (xmrIsMining)
+            {
+                Process[] myProcesses = System.Diagnostics.Process.GetProcesses();
+                foreach (System.Diagnostics.Process myProcess in myProcesses)
+                {
+                    if (myProcess.ProcessName.ToLower().Contains("xmrig"))
+                    {
+                        myProcess.Kill();//强制关闭该程序
+                        LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 停止挖矿，结束进程:" + myProcess.ProcessName + ".exe\n");
+                    }
+                }
+                xmrIsMining = false;
+                uiButton5.Enabled = true;
+                uiButton6.Enabled = false;
+                this.xmrhash.Text = "0H/s";
+                this.xmrshare.Text = "0";
+                this.xmr_reject.Text = "0";
+            }
+        }
+        private void getxmr()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (!xmrIsMining)
+                {
+                    LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 门罗挖矿停止\n");
+                    break;
+                }
+                try
+                {
+                    string json = xmr.getXmrInfo();
+                    JsonConvert.SerializeObject(json);
+                    xmr_Root list = JsonConvert.DeserializeObject<xmr_Root>(json);
+                    this.xmrhash.Text = list.hashrate.total[0] + "H/s";
+                    this.xmrshare.Text = list.results.shares_good.ToString();
+                    this.xmr_reject.Text = (list.results.shares_total - list.results.shares_good).ToString();
+                }
+                catch
+                {
+                    this.xmrhash.Text = "0H/s";
+                    this.xmrshare.Text = "0";
+                    this.xmr_reject.Text = "0";
+                }
+
+            }
+        }
+
+        private void SelectMiner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            InputArgu.Text = "";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int a = 0;
+            int b = 1 / a;
         }
     }
 }

@@ -72,6 +72,7 @@ namespace szzminer_update
             this.Name = "Form1";
             this.Text = "松之宅矿工自动更新";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -17,7 +17,7 @@ namespace szzminer_update
 {
     public partial class Form1 : UIForm
     {
-        string url= "https://szzminer.cn-east-1.tropcdn.com/szzminer.exe";
+        string url= "https://szzkg.bj.bcebos.com/szzminer.exe";
         public Form1()
         {
             InitializeComponent();
@@ -255,6 +255,11 @@ namespace szzminer_update
                 //关闭更新程序
                 Application.Exit();
             });
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

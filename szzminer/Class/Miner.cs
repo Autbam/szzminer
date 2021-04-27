@@ -30,7 +30,7 @@ namespace szzminer.Class
                 Process minerProcess = new Process();
                 minerProcess.StartInfo.FileName = Application.StartupPath+"\\miner\\" + minerBigName + "\\" + minerSmallName + ".exe";
                 minerProcess.StartInfo.Arguments = string.Format(getArguments(), miningPool, wallet, worker, argu);
-                LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 开始挖矿，启动参数:"+ minerProcess.StartInfo.Arguments + "，若长时间无反应，请勾选显示原版内核查看错误提示\n");
+                LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 开始挖矿，启动参数:"+ minerProcess.StartInfo.Arguments + "，若长时间无反应，请双击桌面的“松之宅原版.bat”查看错误提示\n");
                 minerProcess.StartInfo.CreateNoWindow = false;
                 minerProcess.StartInfo.UseShellExecute = false;
                 if (minerSmallName.ToLower().Contains("nb"))

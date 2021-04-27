@@ -42,6 +42,16 @@ namespace szzminer.Views
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GPUStatusTable = new Sunny.UI.UIDataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.recommendation = new Sunny.UI.UIButton();
             this.overClockWriteAll = new Sunny.UI.UIButton();
@@ -59,6 +69,7 @@ namespace szzminer.Views
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.uiGroupBox9 = new Sunny.UI.UIGroupBox();
             this.autoHideSwitch = new Sunny.UI.UISwitch();
             this.uiLabel46 = new Sunny.UI.UILabel();
@@ -132,6 +143,21 @@ namespace szzminer.Views
             this.uiLabel23 = new Sunny.UI.UILabel();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.showCorePanel = new Sunny.UI.UIPanel();
+            this.xmrMining = new System.Windows.Forms.TabPage();
+            this.uiLabel52 = new Sunny.UI.UILabel();
+            this.xmrhash = new Sunny.UI.UILabel();
+            this.xmr_reject = new Sunny.UI.UILabel();
+            this.xmrshare = new Sunny.UI.UILabel();
+            this.uiLabel51 = new Sunny.UI.UILabel();
+            this.uiLabel50 = new Sunny.UI.UILabel();
+            this.uiButton6 = new Sunny.UI.UIButton();
+            this.uiButton5 = new Sunny.UI.UIButton();
+            this.xmrArgu = new Sunny.UI.UITextBox();
+            this.uiLabel49 = new Sunny.UI.UILabel();
+            this.xmrWallet = new Sunny.UI.UITextBox();
+            this.uiLabel48 = new Sunny.UI.UILabel();
+            this.xmrPool = new Sunny.UI.UITextBox();
+            this.uiLabel47 = new Sunny.UI.UILabel();
             this.LogOutput = new Sunny.UI.UIRichTextBox();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.uiLabel41 = new Sunny.UI.UILabel();
@@ -173,16 +199,6 @@ namespace szzminer.Views
             this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postTimer = new System.Windows.Forms.Timer(this.components);
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GPUStatusTable)).BeginInit();
@@ -200,6 +216,7 @@ namespace szzminer.Views
             this.uiGroupBox6.SuspendLayout();
             this.uiGroupBox5.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.xmrMining.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoImage)).BeginInit();
@@ -213,6 +230,7 @@ namespace szzminer.Views
             this.uiTabControl1.Controls.Add(this.tabPage3);
             this.uiTabControl1.Controls.Add(this.tabPage5);
             this.uiTabControl1.Controls.Add(this.tabPage4);
+            this.uiTabControl1.Controls.Add(this.xmrMining);
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiTabControl1.ItemSize = new System.Drawing.Size(100, 40);
@@ -294,6 +312,76 @@ namespace szzminer.Views
             this.GPUStatusTable.Size = new System.Drawing.Size(786, 401);
             this.GPUStatusTable.Style = Sunny.UI.UIStyle.Custom;
             this.GPUStatusTable.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "BUS";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 50;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "显卡型号";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 233;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "算力";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 90;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "接受";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 50;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "拒绝";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 50;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "功率";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 50;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "核心温度";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 70;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "风扇";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 50;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "核心频率";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 70;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "显存频率";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 70;
             // 
             // tabPage2
             // 
@@ -482,6 +570,7 @@ namespace szzminer.Views
             // 
             // uiPanel1
             // 
+            this.uiPanel1.Controls.Add(this.button1);
             this.uiPanel1.Controls.Add(this.uiGroupBox9);
             this.uiPanel1.Controls.Add(this.uiGroupBox8);
             this.uiPanel1.Controls.Add(this.uiGroupBox7);
@@ -499,6 +588,16 @@ namespace szzminer.Views
             this.uiPanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel1.TabIndex = 6;
             this.uiPanel1.Text = null;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(565, 211);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // uiGroupBox9
             // 
@@ -1509,6 +1608,204 @@ namespace szzminer.Views
             this.showCorePanel.TabIndex = 0;
             this.showCorePanel.Text = "未开始挖矿或挖矿内核异常退出";
             // 
+            // xmrMining
+            // 
+            this.xmrMining.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.xmrMining.Controls.Add(this.uiLabel52);
+            this.xmrMining.Controls.Add(this.xmrhash);
+            this.xmrMining.Controls.Add(this.xmr_reject);
+            this.xmrMining.Controls.Add(this.xmrshare);
+            this.xmrMining.Controls.Add(this.uiLabel51);
+            this.xmrMining.Controls.Add(this.uiLabel50);
+            this.xmrMining.Controls.Add(this.uiButton6);
+            this.xmrMining.Controls.Add(this.uiButton5);
+            this.xmrMining.Controls.Add(this.xmrArgu);
+            this.xmrMining.Controls.Add(this.uiLabel49);
+            this.xmrMining.Controls.Add(this.xmrWallet);
+            this.xmrMining.Controls.Add(this.uiLabel48);
+            this.xmrMining.Controls.Add(this.xmrPool);
+            this.xmrMining.Controls.Add(this.uiLabel47);
+            this.xmrMining.Location = new System.Drawing.Point(0, 40);
+            this.xmrMining.Name = "xmrMining";
+            this.xmrMining.Size = new System.Drawing.Size(786, 401);
+            this.xmrMining.TabIndex = 6;
+            this.xmrMining.Text = "门罗双挖";
+            // 
+            // uiLabel52
+            // 
+            this.uiLabel52.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel52.Location = new System.Drawing.Point(606, 250);
+            this.uiLabel52.Name = "uiLabel52";
+            this.uiLabel52.Size = new System.Drawing.Size(67, 23);
+            this.uiLabel52.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLabel52.TabIndex = 8;
+            this.uiLabel52.Text = "总拒绝:";
+            this.uiLabel52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // xmrhash
+            // 
+            this.xmrhash.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.xmrhash.Location = new System.Drawing.Point(132, 251);
+            this.xmrhash.Name = "xmrhash";
+            this.xmrhash.Size = new System.Drawing.Size(154, 23);
+            this.xmrhash.Style = Sunny.UI.UIStyle.Custom;
+            this.xmrhash.TabIndex = 8;
+            this.xmrhash.Text = "0H/s";
+            this.xmrhash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // xmr_reject
+            // 
+            this.xmr_reject.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.xmr_reject.Location = new System.Drawing.Point(669, 251);
+            this.xmr_reject.Name = "xmr_reject";
+            this.xmr_reject.Size = new System.Drawing.Size(63, 23);
+            this.xmr_reject.Style = Sunny.UI.UIStyle.Custom;
+            this.xmr_reject.TabIndex = 8;
+            this.xmr_reject.Text = "0";
+            this.xmr_reject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // xmrshare
+            // 
+            this.xmrshare.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.xmrshare.Location = new System.Drawing.Point(385, 251);
+            this.xmrshare.Name = "xmrshare";
+            this.xmrshare.Size = new System.Drawing.Size(63, 23);
+            this.xmrshare.Style = Sunny.UI.UIStyle.Custom;
+            this.xmrshare.TabIndex = 8;
+            this.xmrshare.Text = "0";
+            this.xmrshare.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiLabel51
+            // 
+            this.uiLabel51.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel51.Location = new System.Drawing.Point(325, 250);
+            this.uiLabel51.Name = "uiLabel51";
+            this.uiLabel51.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel51.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLabel51.TabIndex = 8;
+            this.uiLabel51.Text = "总提交:";
+            this.uiLabel51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiLabel50
+            // 
+            this.uiLabel50.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel50.Location = new System.Drawing.Point(58, 250);
+            this.uiLabel50.Name = "uiLabel50";
+            this.uiLabel50.Size = new System.Drawing.Size(81, 23);
+            this.uiLabel50.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLabel50.TabIndex = 8;
+            this.uiLabel50.Text = "门罗算力:";
+            this.uiLabel50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiButton6
+            // 
+            this.uiButton6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton6.Location = new System.Drawing.Point(476, 184);
+            this.uiButton6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton6.Name = "uiButton6";
+            this.uiButton6.Size = new System.Drawing.Size(100, 35);
+            this.uiButton6.Style = Sunny.UI.UIStyle.Custom;
+            this.uiButton6.TabIndex = 7;
+            this.uiButton6.Text = "停止挖矿";
+            this.uiButton6.Click += new System.EventHandler(this.uiButton6_Click);
+            // 
+            // uiButton5
+            // 
+            this.uiButton5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton5.Location = new System.Drawing.Point(186, 184);
+            this.uiButton5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton5.Name = "uiButton5";
+            this.uiButton5.Size = new System.Drawing.Size(100, 35);
+            this.uiButton5.Style = Sunny.UI.UIStyle.Custom;
+            this.uiButton5.TabIndex = 6;
+            this.uiButton5.Text = "开始挖矿";
+            this.uiButton5.Click += new System.EventHandler(this.uiButton5_Click);
+            // 
+            // xmrArgu
+            // 
+            this.xmrArgu.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.xmrArgu.FillColor = System.Drawing.Color.White;
+            this.xmrArgu.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.xmrArgu.Location = new System.Drawing.Point(136, 118);
+            this.xmrArgu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xmrArgu.Maximum = 2147483647D;
+            this.xmrArgu.Minimum = -2147483648D;
+            this.xmrArgu.MinimumSize = new System.Drawing.Size(1, 1);
+            this.xmrArgu.Name = "xmrArgu";
+            this.xmrArgu.Padding = new System.Windows.Forms.Padding(5);
+            this.xmrArgu.Size = new System.Drawing.Size(150, 29);
+            this.xmrArgu.Style = Sunny.UI.UIStyle.Custom;
+            this.xmrArgu.TabIndex = 5;
+            // 
+            // uiLabel49
+            // 
+            this.uiLabel49.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel49.Location = new System.Drawing.Point(54, 120);
+            this.uiLabel49.Name = "uiLabel49";
+            this.uiLabel49.Size = new System.Drawing.Size(85, 23);
+            this.uiLabel49.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLabel49.TabIndex = 4;
+            this.uiLabel49.Text = "附加参数:";
+            this.uiLabel49.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel49.Click += new System.EventHandler(this.uiLabel49_Click);
+            // 
+            // xmrWallet
+            // 
+            this.xmrWallet.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.xmrWallet.FillColor = System.Drawing.Color.White;
+            this.xmrWallet.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.xmrWallet.Location = new System.Drawing.Point(136, 73);
+            this.xmrWallet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xmrWallet.Maximum = 2147483647D;
+            this.xmrWallet.Minimum = -2147483648D;
+            this.xmrWallet.MinimumSize = new System.Drawing.Size(1, 1);
+            this.xmrWallet.Name = "xmrWallet";
+            this.xmrWallet.Padding = new System.Windows.Forms.Padding(5);
+            this.xmrWallet.Size = new System.Drawing.Size(575, 29);
+            this.xmrWallet.Style = Sunny.UI.UIStyle.Custom;
+            this.xmrWallet.TabIndex = 3;
+            // 
+            // uiLabel48
+            // 
+            this.uiLabel48.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel48.Location = new System.Drawing.Point(54, 74);
+            this.uiLabel48.Name = "uiLabel48";
+            this.uiLabel48.Size = new System.Drawing.Size(85, 23);
+            this.uiLabel48.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLabel48.TabIndex = 2;
+            this.uiLabel48.Text = "钱包地址:";
+            this.uiLabel48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // xmrPool
+            // 
+            this.xmrPool.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.xmrPool.FillColor = System.Drawing.Color.White;
+            this.xmrPool.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.xmrPool.Location = new System.Drawing.Point(136, 25);
+            this.xmrPool.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xmrPool.Maximum = 2147483647D;
+            this.xmrPool.Minimum = -2147483648D;
+            this.xmrPool.MinimumSize = new System.Drawing.Size(1, 1);
+            this.xmrPool.Name = "xmrPool";
+            this.xmrPool.Padding = new System.Windows.Forms.Padding(5);
+            this.xmrPool.Size = new System.Drawing.Size(575, 29);
+            this.xmrPool.Style = Sunny.UI.UIStyle.Custom;
+            this.xmrPool.TabIndex = 1;
+            this.xmrPool.Text = "stratum+tcp://xmr.f2pool.com:13531";
+            // 
+            // uiLabel47
+            // 
+            this.uiLabel47.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLabel47.Location = new System.Drawing.Point(54, 27);
+            this.uiLabel47.Name = "uiLabel47";
+            this.uiLabel47.Size = new System.Drawing.Size(85, 23);
+            this.uiLabel47.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLabel47.TabIndex = 0;
+            this.uiLabel47.Text = "矿池地址:";
+            this.uiLabel47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // LogOutput
             // 
             this.LogOutput.AutoWordSelection = true;
@@ -1898,6 +2195,7 @@ namespace szzminer.Views
             this.SelectMiner.Style = Sunny.UI.UIStyle.Custom;
             this.SelectMiner.TabIndex = 1;
             this.SelectMiner.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SelectMiner.SelectedIndexChanged += new System.EventHandler(this.SelectMiner_SelectedIndexChanged);
             // 
             // SelectCoin
             // 
@@ -2037,76 +2335,6 @@ namespace szzminer.Views
             // 
             this.postTimer.Tick += new System.EventHandler(this.postTimer_Tick);
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "BUS";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 50;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "显卡型号";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 233;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "算力";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 90;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "接受";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 50;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "拒绝";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 50;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "功率";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 50;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "核心温度";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 70;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "风扇";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 50;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "核心频率";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 70;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "显存频率";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 70;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -2123,7 +2351,7 @@ namespace szzminer.Views
             this.ShowIcon = true;
             this.ShowTitleIcon = true;
             this.Style = Sunny.UI.UIStyle.Custom;
-            this.Text = "松之宅矿工v1.1.8";
+            this.Text = "松之宅矿工v1.2.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -2145,6 +2373,7 @@ namespace szzminer.Views
             this.uiGroupBox6.ResumeLayout(false);
             this.uiGroupBox5.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.xmrMining.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.LogoImage)).EndInit();
@@ -2299,5 +2528,21 @@ namespace szzminer.Views
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.TabPage xmrMining;
+        private Sunny.UI.UILabel uiLabel49;
+        private Sunny.UI.UITextBox xmrWallet;
+        private Sunny.UI.UILabel uiLabel48;
+        private Sunny.UI.UITextBox xmrPool;
+        private Sunny.UI.UILabel uiLabel47;
+        private Sunny.UI.UIButton uiButton6;
+        private Sunny.UI.UIButton uiButton5;
+        private Sunny.UI.UITextBox xmrArgu;
+        private Sunny.UI.UILabel uiLabel52;
+        private Sunny.UI.UILabel xmrhash;
+        private Sunny.UI.UILabel uiLabel51;
+        private Sunny.UI.UILabel uiLabel50;
+        private Sunny.UI.UILabel xmr_reject;
+        private Sunny.UI.UILabel xmrshare;
+        private System.Windows.Forms.Button button1;
     }
 }
