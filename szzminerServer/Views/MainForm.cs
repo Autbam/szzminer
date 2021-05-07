@@ -92,7 +92,7 @@ namespace szzminerServer
                 }
             }
         }
-
+        
         private void Flesh()
         {
             int totalPowerC = 0;
@@ -117,6 +117,11 @@ namespace szzminerServer
                         MinerStatusTable.Rows[i].Cells[11].Value = MinerStatusLoad.remoteMinerStatusList[j].Hashrate;
                         MinerStatusTable.Rows[i].Cells[12].Value = MinerStatusLoad.remoteMinerStatusList[j].IP;
                         MinerStatusTable.Rows[i].Cells[13].Value = MinerStatusLoad.remoteMinerStatusList[j].MAC;
+                        MinerStatusTable.Rows[i].Cells[14].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrPool;
+                        MinerStatusTable.Rows[i].Cells[15].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrWallet;
+                        MinerStatusTable.Rows[i].Cells[16].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrHashrate;
+                        MinerStatusTable.Rows[i].Cells[17].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrAccept;
+                        MinerStatusTable.Rows[i].Cells[18].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrReject;
                         break;
                     }
                 }
@@ -137,6 +142,11 @@ namespace szzminerServer
                     MinerStatusTable.Rows[i].Cells[11].Value = MinerStatusLoad.remoteMinerStatusList[j].Hashrate;
                     MinerStatusTable.Rows[i].Cells[12].Value = MinerStatusLoad.remoteMinerStatusList[j].IP;
                     MinerStatusTable.Rows[i].Cells[13].Value = MinerStatusLoad.remoteMinerStatusList[j].MAC;
+                    MinerStatusTable.Rows[i].Cells[14].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrPool;
+                    MinerStatusTable.Rows[i].Cells[15].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrWallet;
+                    MinerStatusTable.Rows[i].Cells[16].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrHashrate;
+                    MinerStatusTable.Rows[i].Cells[17].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrAccept;
+                    MinerStatusTable.Rows[i].Cells[18].Value = MinerStatusLoad.remoteMinerStatusList[j].xmrReject;
                 }
             }
             this.totalPower.Text = totalPowerC.ToString() + " W";
@@ -458,6 +468,53 @@ namespace szzminerServer
             {
                 UIMessageBox.Show("设置完成");
             }
+        }
+
+        private void uiButton13_Click(object sender, EventArgs e)
+        {
+            if (!MinerOptions.startXmr(MinerStatusTable))
+            {
+                UIMessageBox.ShowError("请选择矿机");
+            }
+            else
+            {
+                UIMessageBox.Show("设置完成");
+            }
+        }
+
+        private void uiButton14_Click(object sender, EventArgs e)
+        {
+            if (!MinerOptions.stopXmr(MinerStatusTable))
+            {
+                UIMessageBox.ShowError("请选择矿机");
+            }
+            else
+            {
+                UIMessageBox.Show("设置完成");
+            }
+        }
+
+        private void uiButton15_Click(object sender, EventArgs e)
+        {
+            changeXmr changeXmr = new changeXmr();
+            changeXmr.pool = xmrPool.Text;
+            changeXmr.wallet = xmrWallet.Text;
+            changeXmr.function = "changeXmr";
+            changeXmr.argu = xmrArgu.Text;
+            string msg = JsonConvert.SerializeObject(changeXmr);
+            var i = 0;
+            for (; i < MinerStatusTable.Rows.Count; i++)
+            {
+                if (MinerStatusTable.Rows[i].Cells[2].Value == null)
+                {
+                    continue;
+                }
+                if (MinerStatusTable.Rows[i].Cells[2].Value.ToString() == "True")
+                {
+                    UDPHelper.Send(msg, MinerStatusTable.Rows[i].Cells[12].Value.ToString());
+                }
+            }
+            UIMessageBox.Show("设置完成");
         }
     }
 }

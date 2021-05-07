@@ -21,9 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readMinerDll", "readMinerDl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gminer", "gminer\gminer.csproj", "{2E2B48E1-268D-4C32-8BAA-1CF4BFF74BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "szzminer-nodevfee", "C:\Users\AutbamWang\OneDrive\文档\szzminer-main\szzminer-nodevfee\szzminer-nodevfee.csproj", "{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "szzminer_overclock", "..\..\文档\szzminer-main\szzminer-overclock\WindowsFormsApp1\szzminer_overclock.csproj", "{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "szzminer_overclock", "C:\Users\AutbamWang\OneDrive\文档\szzminer-main\szzminer-overclock\WindowsFormsApp1\szzminer_overclock.csproj", "{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "szzminer-nodevfee", "..\..\文档\szzminer-main\szzminer-nodevfee\szzminer-nodevfee.csproj", "{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,14 +97,6 @@ Global
 		{2E2B48E1-268D-4C32-8BAA-1CF4BFF74BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E2B48E1-268D-4C32-8BAA-1CF4BFF74BD2}.Release|x64.ActiveCfg = Release|Any CPU
 		{2E2B48E1-268D-4C32-8BAA-1CF4BFF74BD2}.Release|x64.Build.0 = Release|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|x64.Build.0 = Debug|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|x64.ActiveCfg = Release|Any CPU
-		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|x64.Build.0 = Release|Any CPU
 		{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}.Debug|x64.ActiveCfg = Debug|x64
@@ -113,6 +105,14 @@ Global
 		{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}.Release|x64.ActiveCfg = Release|x64
 		{FCCC771B-B01C-4FC4-990D-2A0FEE1AFF15}.Release|x64.Build.0 = Release|x64
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Debug|x64.Build.0 = Debug|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|x64.ActiveCfg = Release|Any CPU
+		{8E0A1C8C-E9FB-4F67-A154-D297CE9D921C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

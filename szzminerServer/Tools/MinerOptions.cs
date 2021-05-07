@@ -9,6 +9,48 @@ namespace szzminerServer.Tools
 {
     public class MinerOptions
     {
+        public static bool startXmr(UIDataGridView MinerStatusTable)
+        {
+            if (!checkTableSelected(MinerStatusTable))
+            {
+                return false;
+            }
+            var i = 0;
+            for (; i < MinerStatusTable.Rows.Count; i++)
+            {
+                if (MinerStatusTable.Rows[i].Cells[2].Value == null)
+                {
+                    continue;
+                }
+                if (MinerStatusTable.Rows[i].Cells[2].Value.ToString() == "True")
+                {
+                    UDPHelper.Send("{\"function\":\"startXmr\"}", MinerStatusTable.Rows[i].Cells[12].Value.ToString());
+                    return true;
+                }
+            }
+            return true;
+        }
+        public static bool stopXmr(UIDataGridView MinerStatusTable)
+        {
+            if (!checkTableSelected(MinerStatusTable))
+            {
+                return false;
+            }
+            var i = 0;
+            for (; i < MinerStatusTable.Rows.Count; i++)
+            {
+                if (MinerStatusTable.Rows[i].Cells[2].Value == null)
+                {
+                    continue;
+                }
+                if (MinerStatusTable.Rows[i].Cells[2].Value.ToString() == "True")
+                {
+                    UDPHelper.Send("{\"function\":\"stopXmr\"}", MinerStatusTable.Rows[i].Cells[12].Value.ToString());
+                    return true;
+                }
+            }
+            return true;
+        }
         public static bool startMiner(UIDataGridView MinerStatusTable)
         {
             if (!checkTableSelected(MinerStatusTable))

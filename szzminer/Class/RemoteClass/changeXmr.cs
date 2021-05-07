@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace szzminer.Class.RemoteClass
 {
-    class changeCoinClass
+    class changeXmr
     {
         public string function;
-        public string coin;
-        public string core;
-        public string miningpool;
-        public string miningpoolurl;
+        public string pool;
         public string wallet;
         public string argu;
     }

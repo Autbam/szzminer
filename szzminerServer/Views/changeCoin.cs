@@ -58,6 +58,7 @@ namespace szzminerServer.Views
             changeCoinClass.miningpoolurl = InputMiningPool.Text;
             changeCoinClass.wallet = InputWallet.Text;
             changeCoinClass.function = "changeCoin";
+            changeCoinClass.argu = InputArgu.Text;
             string msg = JsonConvert.SerializeObject(changeCoinClass);
             var i = 0;
             for (; i < MinerStatusTable.Rows.Count; i++)
@@ -148,6 +149,11 @@ namespace szzminerServer.Views
         private void uiButton2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void uiLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

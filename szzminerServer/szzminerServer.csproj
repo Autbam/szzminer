@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\changeCoinClass.cs" />
+    <Compile Include="Class\changeXmr.cs" />
     <Compile Include="Class\RemoteFunction.cs" />
     <Compile Include="Class\RemoteMinerStatus.cs" />
     <Compile Include="Class\RemoteOtherOptions.cs" />

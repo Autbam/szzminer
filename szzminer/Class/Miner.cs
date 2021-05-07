@@ -72,7 +72,14 @@ namespace szzminer.Class
                     }
 
                 }
-                minerProcess.Start();
+                try
+                {
+                    minerProcess.Start();
+                }
+                catch
+                {
+                    UIMessageBox.ShowError("开始挖矿失败，请检查内核是否完整或杀毒软件是否关闭。");
+                }
                 fr = new showMinerWindow(panel, "");
                 IntPtr NbminerHandle = fr.Start(minerProcess);
                 fr.Application_Idle(null, null);

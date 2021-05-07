@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace szzminer.Class.RemoteClass
+namespace szzminerServer.Class
 {
-    class changeCoinClass
+    class changeXmr
     {
         public string function;
-        public string coin;
-        public string core;
-        public string miningpool;
-        public string miningpoolurl;
+        public string pool;
         public string wallet;
         public string argu;
     }

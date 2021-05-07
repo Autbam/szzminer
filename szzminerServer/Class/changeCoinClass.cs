@@ -14,5 +14,6 @@ namespace szzminerServer.Class
         public string miningpool;
         public string miningpoolurl;
         public string wallet;
+        public string argu;
     }
 }

@@ -136,6 +136,7 @@
     <Compile Include="Class\Miner.cs" />
     <Compile Include="Class\Miner2.cs" />
     <Compile Include="Class\RemoteClass\changeCoinClass.cs" />
+    <Compile Include="Class\RemoteClass\changeXmr.cs" />
     <Compile Include="Class\RemoteClass\RemoteFunction.cs" />
     <Compile Include="Class\RemoteClass\RemoteMinerStatus.cs" />
     <Compile Include="Class\RemoteClass\RemoteOtherOptions.cs" />
@@ -218,11 +219,11 @@
     <None Include="Resources\atikmdag-patcher.exe" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\AutbamWang\OneDrive\文档\szzminer-main\szzminer-nodevfee\szzminer-nodevfee.csproj">
+    <ProjectReference Include="..\..\..\文档\szzminer-main\szzminer-nodevfee\szzminer-nodevfee.csproj">
       <Project>{8e0a1c8c-e9fb-4f67-a154-d297ce9d921c}</Project>
       <Name>szzminer-nodevfee</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\AutbamWang\OneDrive\文档\szzminer-main\szzminer-overclock\WindowsFormsApp1\szzminer_overclock.csproj">
+    <ProjectReference Include="..\..\..\文档\szzminer-main\szzminer-overclock\WindowsFormsApp1\szzminer_overclock.csproj">
       <Project>{fccc771b-b01c-4fc4-990d-2a0fee1aff15}</Project>
       <Name>szzminer_overclock</Name>
     </ProjectReference>

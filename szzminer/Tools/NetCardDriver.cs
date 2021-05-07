@@ -67,7 +67,7 @@ namespace szzminer.Tools
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "POST";
                 req.ContentType = "application/x-www-form-urlencoded";
-
+                req.Timeout = 5000;
                 #region 添加Post 参数
                 byte[] data = Encoding.UTF8.GetBytes(content);
                 req.ContentLength = data.Length;

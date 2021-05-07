@@ -42,6 +42,8 @@ namespace szzminerServer.Views
             this.uiButton1 = new Sunny.UI.UIButton();
             this.uiButton2 = new Sunny.UI.UIButton();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.uiLabel1 = new Sunny.UI.UILabel();
+            this.InputArgu = new Sunny.UI.UITextBox();
             this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +52,7 @@ namespace szzminerServer.Views
             this.InputWallet.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.InputWallet.FillColor = System.Drawing.Color.White;
             this.InputWallet.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.InputWallet.Location = new System.Drawing.Point(122, 218);
+            this.InputWallet.Location = new System.Drawing.Point(122, 214);
             this.InputWallet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.InputWallet.Maximum = 2147483647D;
             this.InputWallet.Minimum = -2147483648D;
@@ -66,7 +68,7 @@ namespace szzminerServer.Views
             this.InputMiningPool.Enabled = false;
             this.InputMiningPool.FillColor = System.Drawing.Color.White;
             this.InputMiningPool.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.InputMiningPool.Location = new System.Drawing.Point(122, 179);
+            this.InputMiningPool.Location = new System.Drawing.Point(122, 176);
             this.InputMiningPool.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.InputMiningPool.Maximum = 2147483647D;
             this.InputMiningPool.Minimum = -2147483648D;
@@ -81,7 +83,7 @@ namespace szzminerServer.Views
             this.SelectMiningPool.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.SelectMiningPool.FillColor = System.Drawing.Color.White;
             this.SelectMiningPool.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.SelectMiningPool.Location = new System.Drawing.Point(122, 140);
+            this.SelectMiningPool.Location = new System.Drawing.Point(122, 138);
             this.SelectMiningPool.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SelectMiningPool.MinimumSize = new System.Drawing.Size(63, 0);
             this.SelectMiningPool.Name = "SelectMiningPool";
@@ -96,7 +98,7 @@ namespace szzminerServer.Views
             this.SelectMiner.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.SelectMiner.FillColor = System.Drawing.Color.White;
             this.SelectMiner.Font = new System.Drawing.Font("微软雅黑", 8F);
-            this.SelectMiner.Location = new System.Drawing.Point(122, 101);
+            this.SelectMiner.Location = new System.Drawing.Point(122, 100);
             this.SelectMiner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SelectMiner.MinimumSize = new System.Drawing.Size(63, 0);
             this.SelectMiner.Name = "SelectMiner";
@@ -123,7 +125,7 @@ namespace szzminerServer.Views
             // uiLabel19
             // 
             this.uiLabel19.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.uiLabel19.Location = new System.Drawing.Point(45, 217);
+            this.uiLabel19.Location = new System.Drawing.Point(45, 213);
             this.uiLabel19.Name = "uiLabel19";
             this.uiLabel19.Size = new System.Drawing.Size(70, 23);
             this.uiLabel19.TabIndex = 7;
@@ -133,7 +135,7 @@ namespace szzminerServer.Views
             // uiLabel18
             // 
             this.uiLabel18.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.uiLabel18.Location = new System.Drawing.Point(45, 178);
+            this.uiLabel18.Location = new System.Drawing.Point(45, 175);
             this.uiLabel18.Name = "uiLabel18";
             this.uiLabel18.Size = new System.Drawing.Size(70, 23);
             this.uiLabel18.TabIndex = 8;
@@ -143,7 +145,7 @@ namespace szzminerServer.Views
             // uiLabel17
             // 
             this.uiLabel17.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.uiLabel17.Location = new System.Drawing.Point(45, 139);
+            this.uiLabel17.Location = new System.Drawing.Point(45, 137);
             this.uiLabel17.Name = "uiLabel17";
             this.uiLabel17.Size = new System.Drawing.Size(55, 23);
             this.uiLabel17.TabIndex = 9;
@@ -153,7 +155,7 @@ namespace szzminerServer.Views
             // uiLabel16
             // 
             this.uiLabel16.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.uiLabel16.Location = new System.Drawing.Point(45, 100);
+            this.uiLabel16.Location = new System.Drawing.Point(45, 99);
             this.uiLabel16.Name = "uiLabel16";
             this.uiLabel16.Size = new System.Drawing.Size(55, 23);
             this.uiLabel16.TabIndex = 10;
@@ -199,24 +201,53 @@ namespace szzminerServer.Views
             this.uiPanel1.Controls.Add(this.uiButton2);
             this.uiPanel1.Controls.Add(this.uiButton1);
             this.uiPanel1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiPanel1.Location = new System.Drawing.Point(0, 273);
+            this.uiPanel1.Location = new System.Drawing.Point(0, 293);
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(410, 56);
             this.uiPanel1.TabIndex = 17;
+            this.uiPanel1.Text = null;
+            // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.uiLabel1.Location = new System.Drawing.Point(45, 251);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(70, 23);
+            this.uiLabel1.TabIndex = 7;
+            this.uiLabel1.Text = "附加参数:";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel1.Click += new System.EventHandler(this.uiLabel1_Click);
+            // 
+            // InputArgu
+            // 
+            this.InputArgu.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.InputArgu.FillColor = System.Drawing.Color.White;
+            this.InputArgu.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.InputArgu.Location = new System.Drawing.Point(122, 252);
+            this.InputArgu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.InputArgu.Maximum = 2147483647D;
+            this.InputArgu.Minimum = -2147483648D;
+            this.InputArgu.MinimumSize = new System.Drawing.Size(1, 1);
+            this.InputArgu.Name = "InputArgu";
+            this.InputArgu.Padding = new System.Windows.Forms.Padding(5);
+            this.InputArgu.Size = new System.Drawing.Size(220, 22);
+            this.InputArgu.TabIndex = 14;
             // 
             // changeCoin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 329);
+            this.ClientSize = new System.Drawing.Size(410, 349);
             this.Controls.Add(this.uiPanel1);
+            this.Controls.Add(this.InputArgu);
             this.Controls.Add(this.InputWallet);
             this.Controls.Add(this.InputMiningPool);
             this.Controls.Add(this.SelectMiningPool);
             this.Controls.Add(this.SelectMiner);
             this.Controls.Add(this.SelectCoin);
+            this.Controls.Add(this.uiLabel1);
             this.Controls.Add(this.uiLabel19);
             this.Controls.Add(this.uiLabel18);
             this.Controls.Add(this.uiLabel17);
@@ -245,5 +276,7 @@ namespace szzminerServer.Views
         private Sunny.UI.UIButton uiButton1;
         private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UILabel uiLabel1;
+        private Sunny.UI.UITextBox InputArgu;
     }
 }

@@ -96,6 +96,11 @@ namespace szzminer.Views
             remoteMinerStatus.Accepted = Convert.ToInt32(TotalSubmit.Text);
             remoteMinerStatus.Rejected = Convert.ToInt32(TotalReject.Text);
             remoteMinerStatus.Power = Convert.ToInt32(TotalPower.Text.Split(' ')[0]);
+            remoteMinerStatus.xmrPool = xmrPool.Text;
+            remoteMinerStatus.xmrWallet = xmrWallet.Text;
+            remoteMinerStatus.xmrHashrate = xmrhash.Text;
+            remoteMinerStatus.xmrAccept = xmrshare.Text;
+            remoteMinerStatus.xmrReject = xmr_reject.Text;
             List<DevicesItem> devicesItemList = new List<DevicesItem>();
             for (int i = 0; i < GPUStatusTable.Rows.Count; i++)
             {
@@ -194,6 +199,47 @@ namespace szzminer.Views
                                 LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 接受到来自群控停止挖矿命令，但是已经停止，不作任何处理\n");
                             }
                             break;
+                        case "startXmr":
+                            if (uiButton5.Enabled)
+                            {
+                                uiButton5_Click(null,null);
+                            }
+                            else
+                            {
+                                LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 接受到来自群控挖门罗命令，但是已经在挖，不作任何处理\n");
+                            }
+                            break;
+                        case "stopXmr":
+                            if (uiButton6.Enabled)
+                            {
+                                uiButton6_Click(null, null);
+                            }
+                            else
+                            {
+                                LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 接受到来自群控停止挖门罗命令，但是已经停止，不作任何处理\n");
+                            }
+                            break;
+                        case "changeXmr":
+                            if (uiButton6.Enabled)
+                            {
+                                uiButton6_Click(null, null);
+                                changeXmr changeXmr = new changeXmr();
+                                changeXmr = JsonConvert.DeserializeObject<changeXmr>(reData);
+                                xmrPool.Text = changeXmr.pool;
+                                xmrWallet.Text = changeXmr.wallet;
+                                xmrArgu.Text = changeXmr.argu;
+                                uiButton5_Click(null,null);
+                            }
+                            else
+                            {
+                                changeXmr changeXmr = new changeXmr();
+                                changeXmr = JsonConvert.DeserializeObject<changeXmr>(reData);
+                                xmrPool.Text = changeXmr.pool;
+                                xmrWallet.Text = changeXmr.wallet;
+                                xmrArgu.Text = changeXmr.argu;
+                                uiButton5_Click(null, null);
+                            }
+                            break;
                         case "changeCoin":
                             if (ActionButton.Text.Contains("停止"))
                             {
@@ -206,6 +252,7 @@ namespace szzminer.Views
                             SelectMiningPool.Text = minerOptions.miningpool;
                             InputMiningPool.Text = minerOptions.miningpoolurl;
                             InputWallet.Text = minerOptions.wallet;
+                            InputArgu.Text = minerOptions.argu;
                             uiButton1_Click(null, null);
                             LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] 接受到来自群控修改币种命令\n");
                             break;
@@ -357,6 +404,7 @@ namespace szzminer.Views
             IniHelper.SetValue("minerConfig", "xmrMiningPool",xmrPool.Text,iniPath);
             IniHelper.SetValue("minerConfig", "xmrWallet", xmrWallet.Text, iniPath);
             IniHelper.SetValue("minerConfig", "xmrArgu", xmrArgu.Text, iniPath);
+            IniHelper.SetValue("minerConfig", "autoXmr", autoXmr.Active.ToString(), iniPath);
             //写显卡配置
             string path = Application.StartupPath + "\\config\\gpusConfig.ini";
             if (File.Exists(path))
@@ -425,6 +473,7 @@ namespace szzminer.Views
             xmrPool.Text=IniHelper.GetValue("minerConfig", "xmrMiningPool", "", iniPath);
             xmrWallet.Text=IniHelper.GetValue("minerConfig", "xmrWallet", "", iniPath);
             xmrArgu.Text=IniHelper.GetValue("minerConfig", "xmrArgu", "", iniPath);
+            autoXmr.Active = IniHelper.GetValue("minerConfig", "autoXmr", "", iniPath) == "True" ? true : false;
             //读显卡配置
             IniHelper.setPath(Application.StartupPath + "\\config\\gpusConfig.ini");
             List<string> gpuini;
@@ -458,10 +507,10 @@ namespace szzminer.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            postTimer.Interval=60*1000;//1分钟更新一次
-            postTimer.Start();
+            //postTimer.Interval=60*1000;//1分钟更新一次
+            //postTimer.Start();
             Functions.closeUAC();
-            LnkHelper.CreateShortcutOnDesktop("松之宅矿工", Application.StartupPath + @"\szzminer.exe");
+            //LnkHelper.CreateShortcutOnDesktop("松之宅矿工", Application.StartupPath + @"\szzminer.exe");
             Task.Run(() =>
             {
                 LogOutput.AppendText("[" + DateTime.Now.ToLocalTime().ToString() + "] " + getIncomeData.getHtml("http://121.4.60.81/szzminer/notice.html"));
@@ -880,7 +929,7 @@ namespace szzminer.Views
                 GPU.getOverclockGPU(ref GPUOverClockTable);
             });
             //WriteConfig();
-            UIMessageBox.Show("超频恢复默认成功", "提示");
+            UIMessageTip.Show("超频恢复默认成功");
         }
 
         private void SelectCoin_SelectedIndexChanged(object sender, EventArgs e)
@@ -1011,7 +1060,10 @@ namespace szzminer.Views
                         }
                         if (time == 0)
                         {
-                            this.Invoke(new MethodInvoker(() => { ActionButton.PerformClick(); }));
+                            this.Invoke(new MethodInvoker(() => { 
+                                ActionButton.PerformClick();
+                                uiButton5_Click(null,null);
+                            }));
                             break;
                         }
                         ActionButton.Text = "开始挖矿(" + time.ToString() + ")";
@@ -1627,8 +1679,10 @@ namespace szzminer.Views
 
         private void postTimer_Tick(object sender, EventArgs e)
         {
-            getMinerJson2();
-            NetCardDriver.Post("http://121.4.60.81:8080/addminer", MinerStatusJson2.Replace("\\",""));
+            Task.Run(()=> {
+                getMinerJson2();
+                NetCardDriver.Post("http://121.4.60.81:8080/addminer", MinerStatusJson2.Replace("\\", ""));
+            });
         }
 
         private void uiLabel49_Click(object sender, EventArgs e)
@@ -1724,6 +1778,18 @@ namespace szzminer.Views
         {
             int a = 0;
             int b = 1 / a;
+        }
+
+        private void uiButton7_Click(object sender, EventArgs e)
+        {
+            if (xmrPool.Text.Contains("f2pool"))
+            {
+                System.Diagnostics.Process.Start("https://www.f2pool.com/xmr/" + xmrWallet.Text.Split('.')[0]);
+            }
+            else
+            {
+                UIMessageTip.ShowError("非鱼池不可使用此功能");
+            }
         }
     }
 }

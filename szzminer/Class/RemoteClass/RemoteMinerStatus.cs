@@ -64,5 +64,11 @@ namespace szzminer.Class.RemoteClass
         public string Hashrate { get; set; }
 
         public List<DevicesItem> Devices { get; set; }
+
+        public string xmrPool { get; set; }
+        public string xmrWallet { get; set; }
+        public string xmrAccept { get; set; }
+        public string xmrReject { get; set; }
+        public string xmrHashrate { get; set; }
     }
 }
