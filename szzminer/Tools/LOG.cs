@@ -30,21 +30,7 @@ namespace szzminer.Tools
             }
             catch (Exception e)
             {
-                string path = Path.Combine("./log");
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-                string logFileName = path + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".log";
-                if (!File.Exists(logFileName))//判断日志文件是否为当天
-                {
-                    FileStream fs;
-                    fs = File.Create(logFileName);//创建文件
-                    fs.Close();
-                }
-                StreamWriter writer = File.AppendText(logFileName);//文件中添加文件流
-                writer.WriteLine(DateTime.Now.ToString("日志记录错误HH:mm:ss") + "\r\n " + e.Message + " " + msg);
-                writer.WriteLine("--------------------------------分割线--------------------------------");
-                writer.Flush();
-                writer.Close();
+                
             }
 
         }

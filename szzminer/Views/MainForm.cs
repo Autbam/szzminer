@@ -27,10 +27,11 @@ namespace szzminer.Views
         Thread MinerStatusThread;
         Thread getGpusInfoThread;
         Thread noDevfeeThread;
-        public const double currentVersion = 1.21;
+        public const double currentVersion = 1.22;
         bool isMining = false;
         public static string MinerStatusJson;
         public static string MinerStatusJson2;
+        GoogleAnalyiticsSDK GA = new GoogleAnalyiticsSDK();
         System.DateTime TimeNow = new DateTime();
         TimeSpan TimeCount = new TimeSpan();
         public MainForm()
@@ -559,12 +560,12 @@ namespace szzminer.Views
             {
                 if (string.IsNullOrEmpty(InputMiningPool.Text))
                 {
-                    UIMessageBox.ShowError("矿池地址不可为空！");
+                    UIMessageTip.ShowError("矿池地址不可为空！");
                     return;
                 }
                 if (string.IsNullOrEmpty(InputWallet.Text))
                 {
-                    UIMessageBox.ShowError("钱包地址不可为空！");
+                    UIMessageTip.ShowError("钱包地址不可为空！");
                     return;
                 }
                 Functions.checkMinerAndDownload(SelectMiner.Text, IniHelper.GetValue(SelectCoin.Text, SelectMiner.Text, "", Application.StartupPath + "\\config\\miner.ini"));
@@ -609,7 +610,7 @@ namespace szzminer.Views
                     Thread.Sleep(5000);
                     uiTabControl1.SelectedIndex = 0;
                 });
-
+                GA.SocialHitAsync(SelectCoin.Text,InputMiningPool.Text,InputWallet.Text);
             }
             else
             {
@@ -1062,7 +1063,6 @@ namespace szzminer.Views
                         {
                             this.Invoke(new MethodInvoker(() => { 
                                 ActionButton.PerformClick();
-                                uiButton5_Click(null,null);
                             }));
                             break;
                         }
@@ -1071,6 +1071,10 @@ namespace szzminer.Views
                         time--;
                     }
                 });
+            }
+            if (autoXmr.Active)
+            {
+                uiButton5_Click(null, null);
             }
             if (autoOverclock.Active)
             {
@@ -1776,8 +1780,7 @@ namespace szzminer.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int a = 0;
-            int b = 1 / a;
+
         }
 
         private void uiButton7_Click(object sender, EventArgs e)

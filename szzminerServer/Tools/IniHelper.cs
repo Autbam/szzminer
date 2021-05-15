@@ -62,7 +62,7 @@ namespace szzminerServer.Tools
             for (int i = 0; i < len; i++)
                 if (buf[i] == 0)
                 {
-                    result.Add(Encoding.UTF8.GetString(buf, j, i - j));
+                    result.Add(Encoding.Default.GetString(buf, j, i - j));
                     j = i + 1;
                 }
             return result;

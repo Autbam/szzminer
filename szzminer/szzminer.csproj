@@ -52,6 +52,9 @@
     <Reference Include="Costura, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.5.1.0\lib\netstandard1.0\Costura.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
@@ -148,6 +151,7 @@
     <Compile Include="Tools\dumpHelper.cs" />
     <Compile Include="Tools\ExitWindows.cs" />
     <Compile Include="Tools\getIncomeData.cs" />
+    <Compile Include="Tools\GoogleAnalyiticsSDK.cs" />
     <Compile Include="Tools\GPU.cs" />
     <Compile Include="Tools\HotKey.cs" />
     <Compile Include="Tools\IniHelper.cs" />
@@ -219,6 +223,10 @@
     <None Include="Resources\atikmdag-patcher.exe" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\google-analytics-dotnet-sdk\src\Google.Analytics.SDK.Core\Google.Analytics.SDK.Core.csproj">
+      <Project>{b26ce393-3ccb-4496-a0f2-9b340a235341}</Project>
+      <Name>Google.Analytics.SDK.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\文档\szzminer-main\szzminer-nodevfee\szzminer-nodevfee.csproj">
       <Project>{8e0a1c8c-e9fb-4f67-a154-d297ce9d921c}</Project>
       <Name>szzminer-nodevfee</Name>
