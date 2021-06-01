@@ -10,7 +10,7 @@
 - QQ群: 902822275
 
 # 鸣谢
-感谢有SunnyUI提供的UI界面
+感谢由SunnyUI提供的UI界面
 链接：https://gitee.com/yhuse/SunnyUI/
 
 # 注意
